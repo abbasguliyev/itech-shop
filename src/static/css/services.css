@@ -1,0 +1,42 @@
+.services-variaties{
+    display: flex;
+    flex-direction: column;
+}  
+
+.div-services{
+    margin-top: 6em;
+}
+
+.services{
+    display: flex;
+    flex-direction: column;
+    background-color: #F3F3F3;
+}
+
+
+.service-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 8em;
+    margin-bottom: 5em; 
+    cursor: pointer;
+}
+
+.service-img{
+    width: 28em;
+    height: 27em;
+    border-radius: 2em;
+    box-shadow: rgba(0, 0, 0, 0.15) 0.6em 0.6em; 
+    margin-right: 15px;
+}
+
+.service-img:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    transition: all ease 0.5s;
+}
+
+.scnd-img{
+    margin-left: 8em;
+    margin-right: 8em;
+}

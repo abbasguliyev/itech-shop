@@ -1,0 +1,66 @@
+version: '3.3'
+
+services:
+  itech_shop_db:
+    restart: always
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "54033:5432"
+    networks:
+      - itech-shop-network
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+  itech_shop_web:
+    restart: always
+    build: ./src
+    networks:
+      - itech-shop-network
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py makemigrations &&
+             python manage.py migrate &&
+             gunicorn --bind 0.0.0.0:8000 --timeout 300 --worker-class=gevent --worker-connections=1000 --workers=5 find_doctor.wsgi"
+    volumes:
+      - ./src:/src
+      - ./src/itech_shop:/src/itech_shop
+      - ./src/static:/src/static
+      - ./src/media:/src/media
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - itech_shop_db
+  nginx:
+    restart: always
+    build: ./nginx
+    volumes:
+      - ./src/static:/src/static
+      - ./src/media:/src/media
+    ports:
+      - "80:80"
+    depends_on:
+      - itech_shop_web
+    networks:
+      - itech-shop-network
+
+volumes:
+  postgres_data:
+    driver: local
+  static:
+    driver: local
+  media:
+    driver: local
+  web:
+    driver: local
+
+networks:
+  itech-shop-network:
+    driver: bridge

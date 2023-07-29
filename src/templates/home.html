@@ -1,0 +1,69 @@
+{% extends 'partials/_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="first-div">
+  <div class="cover">
+    <img class="cover-img" src="{% static 'images/cover_img.jpeg' %}" />
+  </div>
+  <div class="cov-div">
+    <!-- <div class="cov-div-1"> -->
+      <div class="cov-div-p">
+        <p class="cov-p">Online alışveriş üçün ən doğru seçim</p>
+        <p class="cov-p">Sürətli çatdırılma</p>
+      </div>
+    <!-- </div> -->
+    <button class="cov-button btn-shadow">
+      <a href="#contact" class="button-p">Əlaqə</a>
+    </button>
+  </div>
+</div>
+<div class="products">
+  <div class="pro-h">
+    <h1 class="pro-h-1">Məhsul</h1>
+    <h1 class="pro-h-2">larımız</h1>
+  </div>
+  <div class="camera-div">
+    {% for product in products  %}
+    <img src="{{product.image.url}}" alt="{{ product.name }}" class="camera-img" />
+    {% endfor %}
+  </div>
+  <button class="pro-button btn-shadow">
+    <a class="pro-button-p">Daha Çox...</a>
+  </button>
+</div>
+<div class="services">
+  <div class="pro-h">
+    <h1 class="pro-h-1">Xidm</h1>
+    <h1 class="pro-h-2">ətlər</h1>
+  </div>
+  <div class="service-div">
+    {% for service in services %}
+    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-img" />
+    {% endfor %}
+  </div>
+  <button class="pro-button btn-shadow">
+    <a class="pro-button-p">Daha Çox...</a>
+  </button>
+</div>
+<div class="contact" id="contact">
+  <div class="pro-h">
+    <h1 class="pro-h-1">Əla</h1>
+    <h1 class="pro-h-2">qə</h1>
+  </div>
+  <form class="form">
+    <div class="form-div">
+      <div class="inputs-name">
+        <input type="text" placeholder="Ad" class="name-input" />
+        <input type="text" placeholder="Soyad" class="name-input" />
+      </div>
+      <input type="email" placeholder="Email" class="email-input" />
+      <input type="text" placeholder="Telefon" class="email-input" />
+      <textarea class="input-textarea" placeholder="Mesajınız"></textarea>
+      <button class="contact-button btn-shadow">
+        <a class="contact-button-p">Göndər</a>
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

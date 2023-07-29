@@ -1,0 +1,44 @@
+{% extends 'partials/_base.html' %}
+{% load static %}
+{% block content %}
+<div class="div-first-a">
+    <div class="cover-a">
+      <img class="cover-img-a" src="{% static 'images/cover_img.jpeg' %}" />
+    </div>
+    <div class="cov-div-a">
+      <div class="cov-div-p-a">
+        <p class="cov-p-a">Məhsullar</p>
+      </div>
+    </div>
+</div>
+<div class="products-varieties">
+    <div class="varieties">
+        <form class="select-form">
+            <select class="var-select">
+                <option class="var-option">Kateqoriyalar</option>
+            </select>
+        </form>
+        <input type="text" class="var-input">
+        <i class="fas fa-search search-i"></i>
+    </div>
+    <div class="div-cameras">
+        <div class="camera-div">
+            <img src="{% static 'images/camera.jpg' %}" alt="" class="camera-img" />
+            <img src="{% static 'images/camera.jpg' %}" alt="" class="camera-img sec-img" />
+            <img src="{% static 'images/camera.jpg' %}" alt="" class="camera-img" />
+        </div>
+        <div class="camera-div">
+            <img src="{% static 'images/camera.jpg' %}" alt="" class="camera-img" />
+            <img src="{% static 'images/camera.jpg' %}" alt="" class="camera-img sec-img" />
+            <img src="{% static 'images/camera.jpg' %}" alt="" class="camera-img" />
+        </div>
+    </div>
+    <div class="pagination">
+      <a href="" class="active">1</a>
+      <a href="">2</a>
+      <a href="">3</a>
+      <a href="">4</a>
+      <a href="">5</a>
+    </div>
+</div>
+  {% endblock content %}

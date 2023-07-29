@@ -1,0 +1,12 @@
+{% load static %}
+
+<header>
+    <a href=""><img class="img" src="{% static 'images/itch-shp.jpeg' %}" /></a>
+    <ul class="head-ul">
+      <li class="head-li"><a class="nav-a {% if '/' == request.path %}li-selected{% endif %}" href="{% url 'home' %}">Ana Səhifə</a></li>
+      <li class="head-li"><a class="nav-a {% if 'about' in request.path %}li-selected{% endif %}" href="{% url 'about' %}">Haqqımızda</a></li>
+      <li class="head-li"><a class="nav-a {% if 'products' in request.path %}li-selected{% endif %}" href="{% url 'products' %}">Məhsullar</a></li>
+      <li class="head-li"><a class="nav-a {% if 'services' in request.path %}li-selected{% endif %}" href="{% url 'services' %}">Xidmətlər</a></li>
+      <li class="head-li"><a class="nav-a" href="{% url 'home' %}">Əlaqə</a></li>
+    </ul>
+</header>

@@ -1,0 +1,18 @@
+.about-div{
+  display: flex;
+  flex-direction: row;
+  padding-top: 10em;
+  padding-left: 8em;
+  padding-bottom: 10em;
+  padding-right: 8em;
+}
+
+.about-img{
+  width: 60em;
+  height: 65em;
+}
+
+.about-p{   
+  font-size: 1.8em;
+  margin-left: 3em;
+}

@@ -1,0 +1,28 @@
+.services-variaties{
+    display: flex;
+    flex-direction: column;
+}  
+
+.div-services{
+    margin-top: 6em;
+}
+
+.service-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 8em;
+    margin-bottom: 5em; 
+}
+
+.service-img{
+    width: 28em;
+    height: 27em;
+    border-radius: 2em;
+    box-shadow: rgba(0, 0, 0, 0.15) 0.6em 0.6em;   
+}
+
+.scnd-img{
+    margin-left: 8em;
+    margin-right: 8em;
+}

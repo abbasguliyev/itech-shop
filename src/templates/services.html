@@ -1,0 +1,36 @@
+{% extends 'partials/_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="div-first-a">
+    <div class="cover-a">
+      <img class="cover-img-a" src="{% static 'images/cover_img.jpeg' %}" />
+    </div>
+    <div class="cov-div-a">
+      <div class="cov-div-p-a">
+        <p class="cov-p-a">Xidmətlər</p>
+      </div>
+    </div>
+</div>
+<div class="services-variaties">
+    <div class="div-services">
+        <div class="service-div">
+            <img src="{% static 'images/service-img.jpeg' %}" alt="" class="service-img" />
+            <img src="{% static 'images/service-img.jpeg' %}" alt="" class="service-img scnd-img" />
+            <img src="{% static 'images/service-img.jpeg' %}" alt="" class="service-img" />
+        </div>
+        <div class="service-div">
+          <img src="{% static 'images/service-img.jpeg' %}" alt="" class="service-img" />
+          <img src="{% static 'images/service-img.jpeg' %}" alt="" class="service-img scnd-img" />
+          <img src="{% static 'images/service-img.jpeg' %}" alt="" class="service-img" />
+        </div>
+    </div>
+    <div class="pagination">
+      <a href="" class="active">1</a>
+      <a href="">2</a>
+      <a href="">3</a>
+      <a href="">4</a>
+      <a href="">5</a>
+    </div>
+</div>
+{% endblock content %}
