@@ -1,18 +1,24 @@
 .about-div{
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   padding-top: 10em;
   padding-left: 8em;
   padding-bottom: 10em;
   padding-right: 8em;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .about-img{
-  width: 60em;
-  height: 65em;
+  height: 25em;
 }
 
 .about-p{   
-  font-size: 1.8em;
+  font-size: 2.2em;
   margin-left: 3em;
+  width: 50em;
 }
+

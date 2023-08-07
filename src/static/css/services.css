@@ -21,6 +21,9 @@
     margin-top: 8em;
     margin-bottom: 5em; 
     cursor: pointer;
+    max-width: 1400px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .service-img{

@@ -1,6 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-size: 10px;
   margin: 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
 header {
@@ -80,12 +87,14 @@ footer {
   padding-bottom: 0px !important;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .footer-div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
 }
 
@@ -146,7 +155,6 @@ footer {
 
 .div-first-a{
   width: 100%;
-  /* display: flex; */
   position: relative;
 }
 
@@ -251,12 +259,18 @@ footer {
 }
 
 .cov-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
     background-color: #FFD431;
     border: none;
     height: 3.5em;
     width: 10em;
-    margin-top: 2em;
     border-radius: 0.3em;
+    margin-top: 2em;
+    margin-bottom: auto;
+    color: #012849;
 }
 
 .cov-button:hover{
@@ -264,12 +278,11 @@ footer {
 }
 
 .button-p{
-    font-size: 1.5em;
-    margin-top: auto;
-    margin-bottom: auto;
-    color: #012849;
+  font-size: 1.5em;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #012849;
 }
-
 .products{
     display: flex;
     flex-direction: column;
@@ -293,28 +306,6 @@ footer {
     font-weight: 100;
 }
 
-.camera-div{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 4em;
-    margin-bottom: 5em;
-}
-
-.camera-img{
-    width: 26em;
-    height: 27em;
-    border-radius: 2em;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-    margin-right: 15px;
-    cursor: pointer;
-}
-
-.camera-img:hover {
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  transition: all ease 0.5s;
-}
 
 .sec-img{
     margin-left: 5em;
@@ -330,15 +321,13 @@ footer {
     box-shadow: rgba(0, 0, 0, 0.15) 0.3em 0.3em;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 6em;
+    margin-bottom: 2.5em;
     cursor: pointer;
 }
 
 .pro-button-p{
     color: white;
     font-size: 1.5em;
-    margin-top: auto;
-    margin-bottom: auto;
 }
 
 .form{
@@ -466,4 +455,24 @@ footer {
 .btn-shadow:hover {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
   transition: all ease 0.5s;
+}
+
+.message-alert {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 2em;
+}
+
+.alert {
+  background-color: #D4EDDA;
+  color: #012849;
+  padding: 10px;
+  border-radius: 5px;
+}
+.alert-danger {
+  background-color: #F8D7DA;
+  color: #012849;
+  padding: 10px;
+  border-radius: 5px;
 }

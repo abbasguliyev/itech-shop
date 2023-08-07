@@ -2,6 +2,15 @@
 {% load static %}
 
 {% block content %}
+<div class="message-alert">
+  {% if messages %} 
+    {% for message in messages %}
+      <div class="message-alert-body {% if message.tags == 'error' %} alert-danger {% else %} alert {% endif %} alert-dismissible fade show" role="alert">
+          {{message}}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
 <div class="first-div">
   <div class="cover">
     <img class="cover-img" src="{% static 'images/cover_img.jpeg' %}" />
@@ -13,9 +22,7 @@
         <p class="cov-p">Sürətli çatdırılma</p>
       </div>
     <!-- </div> -->
-    <button class="cov-button btn-shadow">
-      <a href="#contact" class="button-p">Əlaqə</a>
-    </button>
+      <a href="#contact" class="cov-button btn-shadow">Əlaqə</a>
   </div>
 </div>
 <div class="products">
@@ -23,43 +30,83 @@
     <h1 class="pro-h-1">Məhsul</h1>
     <h1 class="pro-h-2">larımız</h1>
   </div>
-  <div class="camera-div">
-    {% for product in products  %}
-    <img src="{{product.image.url}}" alt="{{ product.name }}" class="camera-img" />
-    {% endfor %}
+  <div class="products-div">
+    {% if products.count == 0 %}
+        <p style="font-size: 2em; text-align: center;">Məhsul tapılmadı</p>
+    {% else %}
+        {% for product in products %}
+        <div class="prod_container">
+            <img src="{{product.image.url}}" alt="{{ product.name }}" class="product-img" />
+            <div class="prod_detail">
+                <div>
+                    <h4>
+                        {{ product.name }}
+                    </h4>
+                    <p>{{ product.price }} AZN</p>
+                </div>
+                <a href="{% url 'product_detail' product.slug %}">Ətraflı</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
   </div>
-  <button class="pro-button btn-shadow">
-    <a class="pro-button-p">Daha Çox...</a>
-  </button>
+  <a href="{% url 'products' %}" class="cov-button pro-button pro-button-p btn-shadow">Daha Çox...</a>
 </div>
 <div class="services">
   <div class="pro-h">
     <h1 class="pro-h-1">Xidm</h1>
     <h1 class="pro-h-2">ətlər</h1>
   </div>
-  <div class="service-div">
-    {% for service in services %}
-    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-img" />
-    {% endfor %}
+  <div class="products-div">
+    {% if services.count == 0 %}
+        <p style="font-size: 2em; text-align: center;">Servis tapılmadı</p>
+    {% else %}
+        {% for service in services %}
+        <div class="prod_container">
+          <img src="{{ service.image.url }}" alt="{{ service.name }}" class="product-img" />
+            <div class="prod_detail">
+                <div>
+                    <h4>
+                        {{ service.name }}
+                    </h4>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
   </div>
-  <button class="pro-button btn-shadow">
-    <a class="pro-button-p">Daha Çox...</a>
-  </button>
+  <a href="{% url 'services' %}" class="cov-button pro-button pro-button-p btn-shadow">Daha Çox...</a>
 </div>
 <div class="contact" id="contact">
   <div class="pro-h">
     <h1 class="pro-h-1">Əla</h1>
     <h1 class="pro-h-2">qə</h1>
   </div>
-  <form class="form">
+  <form class="form" action="{% url 'contact' %}" method="POST">
+    {% csrf_token %}
     <div class="form-div">
       <div class="inputs-name">
-        <input type="text" placeholder="Ad" class="name-input" />
-        <input type="text" placeholder="Soyad" class="name-input" />
+        {{contact_form.first_name}}
+        {% for error in contact_form.first_name.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+        {{contact_form.last_name}}
+        {% for error in contact_form.last_name.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
       </div>
-      <input type="email" placeholder="Email" class="email-input" />
-      <input type="text" placeholder="Telefon" class="email-input" />
-      <textarea class="input-textarea" placeholder="Mesajınız"></textarea>
+      {{contact_form.email}}
+      {% for error in contact_form.email.errors %}
+          <span class="text-danger">{{ error }}</span>
+      {% endfor %}
+      {{contact_form.phone}}
+      {% for error in contact_form.phone.errors %}
+          <span class="text-danger">{{ error }}</span>
+      {% endfor %}
+      {{contact_form.message}}
+      {% for error in contact_form.message.errors %}
+          <span class="text-danger">{{ error }}</span>
+      {% endfor %}
       <button class="contact-button btn-shadow">
         <a class="contact-button-p">Göndər</a>
       </button>
