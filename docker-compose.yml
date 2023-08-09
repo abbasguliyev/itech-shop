@@ -26,14 +26,14 @@ services:
       sh -c "python manage.py collectstatic --noinput &&
              python manage.py makemigrations &&
              python manage.py migrate &&
-             gunicorn --bind 0.0.0.0:8000 --timeout 300 --worker-class=gevent --worker-connections=1000 --workers=5 itech_shop.wsgi"
+             gunicorn --bind 0.0.0.0:80 --timeout 300 --worker-class=gevent --worker-connections=1000 --workers=5 itech_shop.wsgi"
     volumes:
       - ./src:/src
       - ./src/itech_shop:/src/itech_shop
       - ./src/static:/src/static
       - ./src/media:/src/media
     ports:
-      - "8000:8000"
+      - "80:80"
     env_file:
       - .env
     depends_on:
