@@ -21,7 +21,11 @@ def index(request):
 
 
 def about(request):
-    return render(request, 'about.html')
+    company = Company.objects.all().last()
+    context = {
+        "company": company
+    }
+    return render(request, 'about.html', context)
 
 class ContactView(View):
     def post(self, request):

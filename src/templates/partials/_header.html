@@ -1,11 +1,26 @@
 {% load static %}
 
 <header>
-    <a href="{% url 'home' %}"><img class="img" src="{% static 'images/itch-shp.jpeg' %}" /></a>
-    <ul class="head-ul">
-      <li class="head-li"><a class="nav-a {% if '/' == request.path %}li-selected{% endif %}" href="{% url 'home' %}">Ana Səhifə</a></li>
-      <li class="head-li"><a class="nav-a {% if 'about' in request.path %}li-selected{% endif %}" href="{% url 'about' %}">Haqqımızda</a></li>
-      <li class="head-li"><a class="nav-a {% if 'products' in request.path %}li-selected{% endif %}" href="{% url 'products' %}">Məhsullar</a></li>
-      <li class="head-li"><a class="nav-a {% if 'services' in request.path %}li-selected{% endif %}" href="{% url 'services' %}">Xidmətlər</a></li>
-    </ul>
+    <a class="logo" href="{% url 'home' %}"><img class="img" src="{% static 'images/itch-shp.jpeg' %}"/></a>
+    <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <nav class="nav-bar">
+        <ul>
+            <li>
+              <a class="{% if '/' == request.path %}active{% endif %}" href="{% url 'home' %}">Ana Səhifə</a>
+            </li>
+            <li>
+              <a class="{% if 'about' in request.path %}active{% endif %}" href="{% url 'about' %}">Haqqımızda</a>
+            </li>
+            <li>
+              <a class="{% if 'products' in request.path %}active{% endif %}" href="{% url 'products' %}">Məhsullar</a>
+            </li>
+            <li>
+              <a class="{% if 'services' in request.path %}active{% endif %}" href="{% url 'services' %}">Xidmətlər</a>
+            </li>
+        </ul>
+    </nav>
 </header>

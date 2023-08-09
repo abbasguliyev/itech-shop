@@ -24,6 +24,9 @@ class ProductView(ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
+        company = Company.objects.all().last()
+        context['company'] = company
+
         # Filter the result
         filter = filters.ProductFilter(self.request.GET, queryset=self.get_queryset())
         context['filter'] = filter

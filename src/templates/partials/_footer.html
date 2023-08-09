@@ -4,10 +4,10 @@
       <div class="footer-div-1">
         <img class="img-1" src="{% static 'images/itch-shp.jpeg' %}" />
         <ul class="icon-ul">
-          <li class="icon-li"><i class="fa-brands fa-facebook-f"></i></li>
-          <li class="icon-li"><i class="fa-brands fa-instagram"></i></li>
-          <li class="icon-li"><i class="fa-brands fa-tiktok"></i></li>
-          <li class="icon-li"><i class="fa-brands fa-whatsapp"></i></li>
+          <li class="icon-li"><a href="{{company.facebook_url}}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+          <li class="icon-li"><a href="{{company.instagram_url}}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+          <li class="icon-li"><a href="{{company.tiktok_url}}" target="_blank"><i class="fa-brands fa-tiktok"></i></a></li>
+          <li class="icon-li"><a href="whatsapp://send?phone={{company.phone}}"><i class="fa-brands fa-whatsapp" target="_blank"></i></a></li>
         </ul>
       </div>
       <img class="img-2" src="{% static 'images/code-img.jpeg' %}" />

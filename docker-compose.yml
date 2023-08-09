@@ -26,7 +26,7 @@ services:
       sh -c "python manage.py collectstatic --noinput &&
              python manage.py makemigrations &&
              python manage.py migrate &&
-             gunicorn --bind 0.0.0.0:8000 --timeout 300 --worker-class=gevent --worker-connections=1000 --workers=5 find_doctor.wsgi"
+             gunicorn --bind 0.0.0.0:8000 --timeout 300 --worker-class=gevent --worker-connections=1000 --workers=5 itech_shop.wsgi"
     volumes:
       - ./src:/src
       - ./src/itech_shop:/src/itech_shop
