@@ -29,8 +29,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-# ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(',')
-ALLOWED_HOSTS = ['itechshop.az', '188.132.165.147']
+ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(',')
 
 # Application definition
 
