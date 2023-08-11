@@ -176,3 +176,12 @@ CKEDITOR_CONFIGS = {
         'allowedContent': True
    },
 }
+
+# production 
+
+if DEBUG == False:
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_SSL_REDIRECT = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
