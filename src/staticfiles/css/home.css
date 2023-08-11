@@ -8,6 +8,8 @@ body {
     font-size: 10px;
     margin: 0;
     font-family: "Montserrat", sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 a {
@@ -22,8 +24,7 @@ footer {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-
-    flex-shrink: 0;
+    margin-top: auto;
 }
 
 .footer-div {

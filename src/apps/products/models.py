@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from ckeditor.fields import RichTextField
+from itech_shop.image_validator import compress
 
 class Category(models.Model):
     name = models.CharField(_("kateqoriya"), max_length=255)
@@ -22,5 +23,12 @@ class Product(models.Model):
     class Meta:
         verbose_name_plural = _("Məhsullar")
 
+    def save(self, *args, **kwargs):
+        if self.image != None:
+            new_image = compress(self.image)
+            self.image = new_image
+
+        super().save(*args, **kwargs)
+    
     def __str__(self) -> str:
         return self.name

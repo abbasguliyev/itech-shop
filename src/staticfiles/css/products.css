@@ -1,7 +1,11 @@
 .products-varieties {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
+    flex:1;
+    min-height: 70vh;
 }
 
 .varieties {

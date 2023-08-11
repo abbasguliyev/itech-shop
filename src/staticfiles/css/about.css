@@ -10,6 +10,9 @@
   padding-right: 8em;
   margin-right: auto;
   margin-left: auto;
+  min-height:70vh;
+  flex:1;
+
 }
 
 .about-img{

@@ -30,7 +30,7 @@ class ProductView(ListView):
         # Filter the result
         filter = filters.ProductFilter(self.request.GET, queryset=self.get_queryset())
         context['filter'] = filter
-        queryset = filter.qs
+        queryset = filter.qs.order_by('pk')
 
         # Paginate the results
         paginator = Paginator(queryset, self.paginate_by)
