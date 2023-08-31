@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from ckeditor.fields import RichTextField
+from itech_shop.image_validator import compress
 
 class Contact(models.Model):
     first_name = models.CharField(_("ad"), max_length=255)
@@ -10,7 +11,7 @@ class Contact(models.Model):
     message = models.TextField(_("mesaj"))
 
     class Meta:
-        verbose_name_plural = _("Kontaktlar")
+        verbose_name_plural = _("Kontakt mesajları")
 
 
     def __str__(self) -> str:
@@ -21,3 +22,23 @@ class Company(models.Model):
     facebook_url = models.URLField(max_length = 500)
     tiktok_url = models.URLField(max_length = 500)
     instagram_url = models.URLField(max_length = 500)
+
+    class Meta:
+        verbose_name_plural = _("Şirkət məlumatları")
+
+class Partners(models.Model):
+    name = models.CharField(_("adı"), max_length=255)
+    logo = models.ImageField(_("logo"), upload_to="partners/")
+
+    class Meta:
+        verbose_name_plural = _("Partnyorlar")
+
+    def save(self, *args, **kwargs):
+        if self.logo != None:
+            new_logo = compress(self.logo)
+            self.logo = new_logo
+
+        super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return self.name

@@ -7,12 +7,24 @@ from django.core.files import File
 def file_size(value): # add this to some file where you can import it from
     limit = 2 * 1024 * 1024
     if value.size > limit:
-        raise ValidationError('File too large. Size should not exceed 2 MiB.')
+        raise ValidationError('File ölçüsü çox böyükdür. 2MiB-dən çox ola bilməz.')
 
 def compress(image):
     if image != None:
-        im = Image.open(image)
-        im_io = BytesIO() 
-        im.save(im_io, 'JPEG', quality=10) 
-        new_image = File(im_io, name=image.name)
+        img = Image.open(image)
+        format = img.format
+        img_io = BytesIO()
+        # img = img.convert('RGB')
+        if format == 'JPEG':
+            # Convert RGBA to RGB for JPEG
+            if img.mode == 'RGBA':
+                img = img.convert('RGB')
+            img.save(img_io, format="JPEG", quality=50)
+        elif format == 'PNG':
+            img.save(img_io, format="PNG", optimize=True)
+        else:
+            # For other formats, save as-is
+            img.save(img_io, format=format)
+        # img.save(img_io, "JPEG", quality=70)
+        new_image = File(img_io, name=image.name)
         return new_image

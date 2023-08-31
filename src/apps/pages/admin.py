@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.pages.models import Contact, Company
+from apps.pages.models import Contact, Company, Partners
 
 admin.site.site_header = 'ITECH SHOP Admin'
 admin.site.site_title = 'adminsitration of ITech Shop'
@@ -16,3 +16,8 @@ class ContactAdmin(admin.ModelAdmin):
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ('id', 'phone',)
     list_display_links = ('id', 'phone')
+
+@admin.register(Partners)
+class PartnersAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    list_display_links = ('id', 'name')

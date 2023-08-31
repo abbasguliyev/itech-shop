@@ -1,0 +1,44 @@
+{% extends 'partials/_base.html' %}
+{% load static %}
+{% block content %}
+<div class="div-first-a">
+    <div class="cover-a">
+      <img class="cover-img-a" src="{% static 'images/cover_img.jpeg' %}" />
+    </div>
+    <div class="cov-div-a">
+      <div class="cov-div-p-a">
+        <h2 class="cov-p-a">Məhsullar</h2>
+      </div>
+    </div>
+</div>
+<div class="products-varieties">
+    <div>
+        <div class="products-div">
+            {% if products.count == 0 %}
+                <p style="font-size: 2em; text-align: center;">Məhsul tapılmadı</p>
+            {% else %}
+                {% for product in products %}
+                {% include 'product_cart.html' %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="{% url request.resolver_match.url_name %}?page={{ page_obj.previous_page_number }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><span aria-hidden="true">&laquo;</span></a>
+        {% endif %}
+    
+        {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+                <a href="#" class="active">{{ i }}</a>
+            {% else %}
+                <a href="{% url request.resolver_match.url_name %}?page={{ i }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+    
+        {% if page_obj.has_next %}
+            <a href="{% url request.resolver_match.url_name %}?page={{ page_obj.next_page_number }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><span aria-hidden="true">&raquo;</span></a>
+        {% endif %}
+    </div>
+</div>
+  {% endblock content %}

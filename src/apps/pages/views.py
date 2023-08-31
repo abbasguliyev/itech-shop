@@ -1,31 +1,57 @@
+from typing import Any, Dict
+import datetime
 from django.shortcuts import render, redirect
 from django.views import View
+from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 from django.contrib import messages
-from apps.pages.models import Contact, Company
-from apps.products.models import Product
+from django.core.paginator import Paginator
+
+from apps.pages.models import Contact, Company, Partners
+from apps.products.models import Product, Category, Banner, Collection
 from apps.services.models import Services
 from apps.pages.forms import ContactForm
 
-def index(request):
-    products = Product.objects.all()[:3]
-    services = Services.objects.all()[:3]
-    contact_form = ContactForm()
-    company = Company.objects.all().last()
-    context = {
-        "products": products,
-        "services": services,
-        "contact_form": contact_form,
-        "company": company
-    }
-    return render(request, 'home.html', context)
+class IndexView(ListView):
+    model = Product
+    paginate_by = 5
+    template_name = "home.html"
+    context_object_name = "products"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        services = Services.objects.all()
+        contact_form = ContactForm()
+        company = Company.objects.all().last()
+        categories = Category.objects.select_related('parent').all()
+        partners = Partners.objects.all()[:3]
+        banners = Banner.objects.filter(is_active=True)
+        collection = Collection.objects.prefetch_related('products').filter(is_active=True, end_date__lte=datetime.datetime.today()).last()
+        if collection is not None:
+            if collection.products.all() is not None:
+                collection_prods = list(collection.products.all())
+            else:
+                collection_prods = list()
+        else:
+            collection_prods = list()
+        context['services'] = services
+        context['contact_form'] = contact_form
+        context['company'] = company
+        context['categories'] = categories
+        context['partners'] = partners
+        context['banners'] = banners
+        context['collection'] = collection
+        context['collection_prods'] = collection_prods
+        return context
 
-def about(request):
-    company = Company.objects.all().last()
-    context = {
-        "company": company
-    }
-    return render(request, 'about.html', context)
+class AboutView(TemplateView):
+    template_name = "about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        company = Company.objects.all().last()
+        context['company'] = company
+        return context
 
 class ContactView(View):
     def post(self, request):
@@ -37,4 +63,21 @@ class ContactView(View):
         else:
             messages.error(request, "Mesajınızı göndərərkən xəta baş verdi")
             return redirect('home')
+    
+
+class IndexPartnersPaginationView(ListView):
+    model = Partners
+    paginate_by = 5
+    template_name = "partners_index_pagination.html"
+    context_object_name = "partners"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        partners = Partners.objects.all()
+        paginator = Paginator(partners, self.paginate_by)
+        page = self.request.GET.get('page')
+        page_obj = paginator.get_page(page)
+        partners = paginator.page(page)
+        context["page_obj"] = page_obj
+        return context
     

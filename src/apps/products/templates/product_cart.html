@@ -1,0 +1,28 @@
+{% load static %}
+<div class="product_wrapper">
+    <div onclick="location.href='{% url 'product_detail' product.slug %}';" class="prod_container">
+        <span class="free_delivery_text">Pulsuz çatdırılma</span>
+        <img src="{{product.image.url}}" alt="{{ product.name }}" class="product-img" />
+        <div class="prod_detail">
+            <div>
+                <h4>
+                    {{ product.name }}
+                </h4>
+                <p>{{ product.price }} AZN</p>
+            </div>
+        </div>
+        <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn">
+            {% csrf_token %}
+            <input type="hidden" value={{product.pk}} name="product">
+            <button type="submit">Səbətə at</button>
+        </form>
+    </div>
+    <div class="prod-attr">
+        {% for attribute in product.attributes.all %}
+        <div>
+            <span>{{attribute.title}}:</span>
+            <span>{{attribute.value}}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>

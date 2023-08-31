@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'apps.pages.apps.PagesConfig',
     'apps.products.apps.ProductsConfig',
     'apps.services.apps.ServicesConfig',
-    
+    'apps.cart.apps.CartConfig',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -132,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'az-az'
+LANGUAGE_CODE = 'en-en'
 
 TIME_ZONE = 'UTC'
 

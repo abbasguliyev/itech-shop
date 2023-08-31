@@ -1,26 +1,41 @@
 {% load static %}
 
 <header>
+  <div class="container">
     <a class="logo" href="{% url 'home' %}"><img class="img" src="{% static 'images/itch-shp.jpeg' %}"/></a>
     <div class="hamburger">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
     </div>
+    <section class="search">
+      <form action="{% url 'products' %}" method="GET" class="select-form">
+        <input type="text" name="name" placeholder="Axtarış...">
+        <button type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+      </form>
+    </section>
     <nav class="nav-bar">
-        <ul>
-            <li>
-              <a class="{% if '/' == request.path %}active{% endif %}" href="{% url 'home' %}">Ana Səhifə</a>
-            </li>
-            <li>
-              <a class="{% if 'about' in request.path %}active{% endif %}" href="{% url 'about' %}">Haqqımızda</a>
-            </li>
-            <li>
-              <a class="{% if 'products' in request.path %}active{% endif %}" href="{% url 'products' %}">Məhsullar</a>
-            </li>
-            <li>
-              <a class="{% if 'services' in request.path %}active{% endif %}" href="{% url 'services' %}">Xidmətlər</a>
-            </li>
-        </ul>
+      <ul>
+        <li>
+          <a class="{% if '/' == request.path %}active{% endif %}" href="{% url 'home' %}">Ana Səhifə</a>
+        </li>
+        <li>
+          <a class="{% if 'about' in request.path %}active{% endif %}" href="{% url 'about' %}">Haqqımızda</a>
+        </li>
+        <li>
+          <a class="{% if 'products' in request.path %}active{% endif %}" href="{% url 'products' %}">Məhsullar</a>
+        </li>
+        <li>
+          <a class="{% if 'services' in request.path %}active{% endif %}" href="{% url 'services' %}">Xidmətlər</a>
+        </li>
+        <li class="cart-icon">
+          <a class="{% if 'cart' in request.path %}active{% endif %}" href="{% url 'cart' %}">
+            <i class="fa-solid fa-cart-shopping"></i>{% if request.session.cart|length > 0 %}<span>{{request.session.cart | length}}</span>{% endif %}
+          </a>
+        </li>
+      </ul>
     </nav>
+  </div>
 </header>

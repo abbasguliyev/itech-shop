@@ -1,116 +1,167 @@
-{% extends 'partials/_base.html' %}
+{% extends 'partials/_base.html' %} 
 {% load static %}
-
 {% block content %}
 <div class="message-alert">
-  {% if messages %} 
+    {% if messages %} 
     {% for message in messages %}
-      <div class="message-alert-body {% if message.tags == 'error' %} alert-danger {% else %} alert {% endif %} alert-dismissible fade show" role="alert">
-          {{message}}
-      </div>
-    {% endfor %}
-  {% endif %}
-</div>
-<div class="first-div">
-  <div class="cover">
-    <img class="cover-img" src="{% static 'images/cover_img.jpeg' %}" />
-  </div>
-  <div class="cov-div">
-    <!-- <div class="cov-div-1"> -->
-      <div class="cov-div-p">
-        <p class="cov-p">Online alışveriş üçün ən doğru seçim</p>
-        <p class="cov-p">Sürətli çatdırılma</p>
-      </div>
-    <!-- </div> -->
-      <a href="#contact" class="cov-button btn-shadow">Əlaqə</a>
-  </div>
-</div>
-<div class="products">
-  <div class="pro-h">
-    <h1 class="pro-h-1">Məhsul</h1>
-    <h1 class="pro-h-2">larımız</h1>
-  </div>
-  <div class="products-div">
-    {% if products.count == 0 %}
-        <p style="font-size: 2em; text-align: center;">Məhsul tapılmadı</p>
-    {% else %}
-        {% for product in products %}
-        <div class="prod_container">
-            <img src="{{product.image.url}}" alt="{{ product.name }}" class="product-img" />
-            <div class="prod_detail">
-                <div>
-                    <h4>
-                        {{ product.name }}
-                    </h4>
-                    <p>{{ product.price }} AZN</p>
-                </div>
-                <a href="{% url 'product_detail' product.slug %}">Ətraflı</a>
-            </div>
-        </div>
-        {% endfor %}
-    {% endif %}
-  </div>
-  <a href="{% url 'products' %}" class="cov-button pro-button pro-button-p btn-shadow">Daha Çox...</a>
-</div>
-<div class="services">
-  <div class="pro-h">
-    <h1 class="pro-h-1">Xidm</h1>
-    <h1 class="pro-h-2">ətlər</h1>
-  </div>
-  <div class="products-div">
-    {% if services.count == 0 %}
-        <p style="font-size: 2em; text-align: center;">Servis tapılmadı</p>
-    {% else %}
-        {% for service in services %}
-        <div class="prod_container">
-          <img src="{{ service.image.url }}" alt="{{ service.name }}" class="product-img" />
-            <div class="prod_detail">
-                <div>
-                    <h4>
-                        {{ service.name }}
-                    </h4>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    {% endif %}
-  </div>
-  <a href="{% url 'services' %}" class="cov-button pro-button pro-button-p btn-shadow">Daha Çox...</a>
-</div>
-<div class="contact" id="contact">
-  <div class="pro-h">
-    <h1 class="pro-h-1">Əla</h1>
-    <h1 class="pro-h-2">qə</h1>
-  </div>
-  <form class="form" action="{% url 'contact' %}" method="POST">
-    {% csrf_token %}
-    <div class="form-div">
-      <div class="inputs-name">
-        {{contact_form.first_name}}
-        {% for error in contact_form.first_name.errors %}
-            <span class="text-danger">{{ error }}</span>
-        {% endfor %}
-        {{contact_form.last_name}}
-        {% for error in contact_form.last_name.errors %}
-            <span class="text-danger">{{ error }}</span>
-        {% endfor %}
-      </div>
-      {{contact_form.email}}
-      {% for error in contact_form.email.errors %}
-          <span class="text-danger">{{ error }}</span>
-      {% endfor %}
-      {{contact_form.phone}}
-      {% for error in contact_form.phone.errors %}
-          <span class="text-danger">{{ error }}</span>
-      {% endfor %}
-      {{contact_form.message}}
-      {% for error in contact_form.message.errors %}
-          <span class="text-danger">{{ error }}</span>
-      {% endfor %}
-      <button class="contact-button btn-shadow">
-        <a class="contact-button-p">Göndər</a>
-      </button>
+    <div class="message-alert-body {% if message.tags == 'error' %} alert-danger {% else %} alert {% endif %} alert-dismissible fade show" role="alert">
+        {{message}}
     </div>
-  </form>
+    {% endfor %} 
+    {% endif %}
+</div>
+<div class="container">
+    {% include 'partials/_section_header.html' %}
+    <section class="section-contain">
+        <div class="section-title-container">
+            <h3 class="section-title mb-4"><b>Məhsullar</b></h3>
+        </div>
+        {% if products.count == 0 %}
+            <div class="not-found">
+                <p style="font-size: 2em;">Məhsul tapılmadı</p>
+            </div>
+        {% else %}
+            <div class="product-body" id="product_id">
+                <div class="home-product-slider">
+                    <div>
+                        {% if page_obj.has_previous %}
+                        <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+                        {% else %}
+                        <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% for product in products %}
+                        {% include 'product_cart.html' %}
+                        {% endfor %} 
+                    </div>
+                    <div>
+                        {% if page_obj.has_next %}
+                        <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+                        {% else %}
+                        <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <a href="{% url 'products' %}" class="btn-more">Bütün məhsulları gör</a>
+            </div>
+        {% endif %}
+    </section>
+    <section class="section-contain">
+        <div class="section-title-container">
+            <h3 class="section-title mb-4"><b>Xidmətlər</b></h3>
+        </div>
+        {% if services.count == 0 %}
+            <div class="not-found">
+                <p style="font-size: 2em;">Servis tapılmadı</p>
+            </div>
+        {% else %}
+            <div class="service-body" id="service_id">
+                <div>
+                    {% if page_obj.has_previous %}
+                    <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+                    {% else %}
+                    <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+                    {% endif %}
+                    {% for service in services %}
+                    <div class="prod_container">
+                        <img src="{{ service.image.url }}" alt="{{ service.name }}" class="product-img"/>
+                        <div class="prod_detail">
+                            <div>
+                                <h4>{{ service.name }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+                    {% else %}
+                    <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+                    {% endif %}
+                </div>
+                <a href="{% url 'services' %}" class="btn-more">Bütün xidmətləri gör</a>
+            </div>
+        {% endif %}
+    </section>
+    <section class="section-contain">
+        <div class="section-title-container">
+            <h3 class="section-title mb-4"><b>Partnyorlar</b></h3>
+        </div>
+        <div class="partners-body" id="partners_id">
+            {% if partners.count == 0 %}
+            <p style="font-size: 2em; text-align: center">Partnyor tapılmadı</p>
+            {% else %}
+            {% if page_obj.has_previous %}
+            <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+            {% else %}
+            <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+            {% endif %}
+            {% for partner in partners %}
+            <div class="partners-slide">
+                <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
+            </div>
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+            {% else %}
+            <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+            {% endif %}
+            {% endif %}
+        </div>
+    </section>
+    <section class="contact" id="contact">
+        <div class="section-title-container">
+            <h3 class="section-title"><b>Əlaqə</b></h3>
+        </div>
+        <form class="form" action="{% url 'contact' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-div">
+                <div class="inputs-name">
+                    {{contact_form.first_name}} 
+                    {% for error in contact_form.first_name.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                    {% endfor %} {{contact_form.last_name}} 
+                    {% for error in contact_form.last_name.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {{contact_form.email}} 
+                {% for error in contact_form.email.errors%}
+                <span class="text-danger">{{ error }}</span>
+                {% endfor %} {{contact_form.phone}} 
+                {% for error in contact_form.phone.errors %}
+                <span class="text-danger">{{ error }}</span>
+                {% endfor %} {{contact_form.message}} 
+                {% for error in contact_form.message.errors %}
+                <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+                <button class="contact-button btn-shadow">
+                    <a class="contact-button-p">Göndər</a>
+                </button>
+            </div>
+        </form>
+    </section>
 </div>
 {% endblock content %}
+
+{% block custom_js %}
+<script>
+var countDownDateStr = document.getElementById("coll_end_date").value
+var countDownDate = new Date(countDownDateStr).getTime();
+var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+</script>
+{% endblock custom_js %}

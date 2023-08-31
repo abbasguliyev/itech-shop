@@ -1,0 +1,68 @@
+{% extends 'partials/_base.html' %}
+{% load static %}
+{% block content %}
+<div class="div-first-a">
+    <div class="cover-a">
+      <img class="cover-img-a" src="{% static 'images/cover_img.jpeg' %}" />
+    </div>
+    <div class="cov-div-a">
+      <div class="cov-div-p-a">
+        <h2 class="cov-p-a">Səbət</h2>
+      </div>
+    </div>
+</div>
+{% if products|length == 0 %}
+<div class="container cart-no-prod">
+  <p>Səbətinizdə məhsul yoxdur</p>
+</div>
+{% else %}
+<div class="container cart_container">
+  <ul class="cart_products_container">
+    {% for product in products %}
+        <li>
+          <div class="cart-prod-name">
+            <img src={{product.image.url}} alt="{{product.name}}">
+            <a class="product-name-class" href="{% url 'product_detail' product.slug %}">{{product.name}}</a>
+          </div>
+          <div class="cart_prod_count">
+            <div class="number">
+              <p>Miqdar</p>
+              <span class="minus">-</span>
+              <input id="cart-prod-count-id-{{product.id}}" class="cart-prod-count" type="text" value="1"/>
+              <span class="plus">+</span>
+            </div>
+          </div>
+          <div class="cart-prod-price">
+            <p id="cart-prod-price-id">{{product.price}}</p>
+            <p id="cart-prod-default-price-id" style="display:none;">{{product.price}}</p>
+            <p>AZN</p>
+          </div>
+          <div class="cart-delete-icon">
+            <form action="{% url 'delete_prod_from_cart' product.pk %}" method="post">
+              {% csrf_token %}
+              <button type="submit">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </li>
+    {% endfor %}
+  </ul>
+  <div class="order_confirm_container">
+    <ul>
+      <li class="order-title">Səbətdəki məhsullar</li>
+      <li class="orders-total-price">
+        <p style="color: #012849">Toplam qiymət:</p>
+        <div>
+          <p id="total-price-id">{{total_price}}</p>
+          <p>AZN</p>
+        </div>
+      </li>
+      <p style="display:none;">{{company.phone}}</p>
+      <a href="whatsapp://send?phone={{company.phone}}" id="submit-order-btn-id" class="submit-order-btn" target="_blank">Sifarişi rəsmləşdir</a>
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+{% endblock content %}

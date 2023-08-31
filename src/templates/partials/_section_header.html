@@ -1,0 +1,94 @@
+{% load static %}
+<section class="header-container">
+    <div class="category">
+        <ul>
+            {% for category in categories %}
+            {% if category.parent == None %}
+            <li>
+                <a href="">
+                    <img src="{{ category.icon.url }}" alt="">
+                    <p>{{ category.name }}</p>
+                    <ul class="children">
+                        <li>
+                            {% for ct in category.children.all %}
+                            <a href="">
+                                <img src="{{ ct.icon.url }}" alt="">
+                                <p>{{ ct.name }}</p>
+                            </a>
+                            <hr>
+                            {% endfor %}
+                        </li>
+                    </ul>
+                </a>
+                <hr>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <section class="post-carousel">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% if banners is not None %}
+                {% for banner in banners %}
+                <div class="carousel-item active index-carousel">
+                    <img src="{{banner.image.url}}" class="d-block w-100 index-carousel-img " alt="{{banner.title}}">
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="carousel-item active index-carousel">
+                    <img src="{% static 'images/default2.jpg' %}" class="d-block w-100 index-carousel-img " alt="default">
+                </div>
+            {% endif %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    </section>
+    <section class="offer">
+        <div class="offer-head">
+            {% if collection.title is not None %}
+            <p>{{collection.title}}</p>
+            {% else %}
+            <p>Həftənin Təklifi</p>
+            {% endif %}
+            {% if collection.end_date != None %}
+            <input type="datetime" id="coll_end_date" style="display: none;" value="{{collection.end_date|date:"M d, Y H:i:s"}}"/>
+            {% endif %}
+            <div id="demo"></div>
+        </div>
+        <div class="offer-body">
+            <div id="carouselBannerFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% if collection_prods.count == 0 %}
+                    {% for product in collection_prods %}
+                    <div class="carousel-item active index-carousel">
+                        {% include 'product_cart.html' %}
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="carousel-item active index-carousel">
+                        <img src="{% static 'images/default2.jpg' %}" class="d-block w-100 index-carousel-img " alt="default">
+                    </div>
+                    {% endif %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselBannerFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselBannerFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+</section>
+

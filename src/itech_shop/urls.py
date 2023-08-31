@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('apps.pages.urls')),
     path('products/', include('apps.products.urls')),
     path('services/', include('apps.services.urls')),
+    path('cart/', include('apps.cart.urls')),
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
 ]

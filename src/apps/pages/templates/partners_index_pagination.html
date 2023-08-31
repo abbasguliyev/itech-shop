@@ -1,0 +1,21 @@
+{% load i18n %}
+
+{% if partners.count == 0 %}
+<p style="font-size: 2em; text-align: center">Partnyor tapılmadı</p>
+{% else %}
+{% if page_obj.has_previous %}
+<a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+{% else %}
+<a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+{% endif %}
+{% for partner in partners %}
+<div class="partners-slide">
+    <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
+</div>
+{% endfor %}
+{% if page_obj.has_next %}
+<a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+{% else %}
+<a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+{% endif %}
+{% endif %}
