@@ -9,11 +9,7 @@ class ProductFilter(django_filters.FilterSet):
         'class': 'var-input',
         'name': 'name'
     }), required=False)
-    category = django_filters.ModelChoiceFilter(queryset = Category.objects.all(), widget=forms.Select(attrs={
-        'class': 'var-select',
-        'placeholder': 'category',
-        'name': 'category'
-    }), required=False)
+    category = django_filters.ModelMultipleChoiceFilter(queryset = Category.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False)
 
     class Meta:
         model = Product

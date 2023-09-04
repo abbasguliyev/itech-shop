@@ -32,7 +32,7 @@
         <div class="carousel-inner">
             {% if banners is not None %}
                 {% for banner in banners %}
-                <div class="carousel-item active index-carousel">
+                <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %} index-carousel" id="{{banner.pk}}">
                     <img src="{{banner.image.url}}" class="d-block w-100 index-carousel-img " alt="{{banner.title}}">
                 </div>
                 {% endfor %}
@@ -67,9 +67,9 @@
         <div class="offer-body">
             <div id="carouselBannerFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    {% if collection_prods.count == 0 %}
+                    {% if collection_prods.count != 0 %}
                     {% for product in collection_prods %}
-                    <div class="carousel-item active index-carousel">
+                    <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %} index-carousel" id="{{product.pk}}">
                         {% include 'product_cart.html' %}
                     </div>
                     {% endfor %}

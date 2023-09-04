@@ -26,10 +26,10 @@ class IndexView(ListView):
         categories = Category.objects.select_related('parent').all()
         partners = Partners.objects.all()[:3]
         banners = Banner.objects.filter(is_active=True)
-        collection = Collection.objects.prefetch_related('products').filter(is_active=True, end_date__lte=datetime.datetime.today()).last()
+        collection = Collection.objects.prefetch_related('products').filter(is_active=True, end_date__lte=datetime.datetime.today()).order_by("pk").last()
         if collection is not None:
             if collection.products.all() is not None:
-                collection_prods = list(collection.products.all())
+                collection_prods = list(collection.products.order_by("pk").all())
             else:
                 collection_prods = list()
         else:

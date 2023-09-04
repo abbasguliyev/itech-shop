@@ -1,5 +1,5 @@
 {% load static %}
-<div class="product_wrapper">
+<div class="product_wrapper" id="{{product.pk}}">
     <div onclick="location.href='{% url 'product_detail' product.slug %}';" class="prod_container">
         <span class="free_delivery_text">Pulsuz çatdırılma</span>
         <img src="{{product.image.url}}" alt="{{ product.name }}" class="product-img" />
@@ -19,10 +19,12 @@
     </div>
     <div class="prod-attr">
         {% for attribute in product.attributes.all %}
-        <div>
-            <span>{{attribute.title}}:</span>
-            <span>{{attribute.value}}</span>
-        </div>
+            {% if attribute.show_cart == True %}
+            <div>
+                <b>{{attribute.title}}:</b>
+                <span>{{attribute.value}}</span>
+            </div>
+            {% endif %}
         {% endfor %}
     </div>
 </div>

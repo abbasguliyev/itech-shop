@@ -41,6 +41,7 @@ class ProductView(ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
+        context["categories"] = Category.objects.all()
         company = Company.objects.all().last()
         context['company'] = company
 

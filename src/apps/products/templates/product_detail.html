@@ -11,26 +11,48 @@
       </div>
     </div>
 </div>
-<div class="products-varieties">
+<div class="products-detail-body">
     <div class="product_container">
-        <img src="{{product.image.url}}" alt="product.name">
+        <div class="prod-detail-img">
+            <img src="{{product.image.url}}" alt="product.name">
+        </div>
         <div class="product_detail">
-            <div class="product_detail_head">
-                <h3>
-                    {{product.name}}
-                </h3>
-                <h3>
-                    {{product.price}} AZN
-                </h3>
+            <div class="product_detail_info">
+                <div class="product_detail_info_head">
+                    <h3>
+                        {{product.name}}
+                    </h3>
+                    <h3>
+                        {{product.price}} AZN
+                    </h3>
+                </div>
+                <hr>
+                <div class="product_detail_category">
+                    <p>Kateqoriyası:</p>  
+                    <span>{{product.category}}</span>
+                </div>
+                <div class="product_detail_info_body">
+                    {{product.description | safe}}
+                </div>
+                <div class="product_detail_info_btn_group">
+                    <form method="POST" action="{% url 'add_to_cart' %}">
+                        {% csrf_token %}
+                        <input type="hidden" value={{product.pk}} name="product">
+                        <button type="submit" class="product_detail_info_btn_cart">Səbətə at</button>
+                    </form>
+                    <a href="whatsapp://send?phone={{company.phone}}&text=Salam. Aşağıdakı məhsulu almaq istəyirəm. {{ request.build_absolute_uri }}" class="product_detail_info_btn_buy" target="_blank">Sifariş et</a>
+                </div>
             </div>
-            <p>
-                <b>Kateqoriyası:</b>  {{product.category}}
-            </p>
-            <div class="product_detail_body">
-                {{product.description | safe}}
+            <div class="product_detail_attr">
+                <p>Xüsusiyyətlər</p>
+                {% for attribute in product.attributes.all %}
+                <div>
+                    <b>{{attribute.title}}:</b>
+                    <span>{{attribute.value}}</span>
+                </div>
+                {% endfor %}
             </div>
-            <a href="whatsapp://send?phone={{company.phone}}&text={{ request.build_absolute_uri }}" target="_blank">Sifariş Et</a>
         </div>
     </div>
 </div>
-  {% endblock content %}
+{% endblock content %}

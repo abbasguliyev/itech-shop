@@ -26,6 +26,7 @@ class Category(models.Model):
 class Attributes(models.Model):
     title = models.CharField(_("başlıq"), max_length=255)
     value = models.CharField(_("dəyər"), max_length=255)
+    show_cart = models.BooleanField(_("Kartın üstünə gəldikdə göstərilsin"), default=False)
 
     class Meta:
         verbose_name_plural = _("Atributlar")
