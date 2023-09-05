@@ -47,6 +47,7 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - itech_shop_web
     networks:
