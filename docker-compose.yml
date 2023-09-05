@@ -44,6 +44,7 @@ services:
     volumes:
       - ./src/static:/src/static
       - ./src/media:/src/media
+      - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
     depends_on:
