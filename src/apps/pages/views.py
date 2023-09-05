@@ -21,7 +21,6 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         services = Services.objects.all()
-        contact_form = ContactForm()
         company = Company.objects.all().last()
         categories = Category.objects.select_related('parent').all()
         partners = Partners.objects.all()[:3]
@@ -35,7 +34,6 @@ class IndexView(ListView):
         else:
             collection_prods = list()
         context['services'] = services
-        context['contact_form'] = contact_form
         context['company'] = company
         context['categories'] = categories
         context['partners'] = partners
@@ -54,6 +52,13 @@ class AboutView(TemplateView):
         return context
 
 class ContactView(View):
+    def get(self, request):
+        form = ContactForm()
+        context = {
+            "form": form
+        }
+        return render(request, "contact.html", context)
+    
     def post(self, request):
         form = ContactForm(request.POST)
         if form.is_valid():

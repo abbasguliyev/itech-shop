@@ -3,14 +3,30 @@
     <div class="footer-div">
       <div class="footer-div-1">
         <img class="img-1" src="{% static 'images/itch-shp.jpeg' %}" />
-        <ul class="icon-ul">
-          <li class="icon-li"><a href="{{company.facebook_url}}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
-          <li class="icon-li"><a href="{{company.instagram_url}}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
-          <li class="icon-li"><a href="{{company.tiktok_url}}" target="_blank"><i class="fa-brands fa-tiktok"></i></a></li>
-          <li class="icon-li"><a href="whatsapp://send?phone={{company.phone}}"><i class="fa-brands fa-whatsapp" target="_blank"></i></a></li>
-        </ul>
       </div>
-      <img class="img-2" src="{% static 'images/code-img.jpeg' %}" />
+      <div class="footer-div-2">
+        <div class="icon-ul">
+          <p>Bizimlə qalın:</p>
+          <ul>
+            <li class="icon-li"><a href="{{company.facebook_url}}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li class="icon-li"><a href="{{company.instagram_url}}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+            <li class="icon-li"><a href="{{company.tiktok_url}}" target="_blank"><i class="fa-brands fa-tiktok"></i></a></li>
+            <li class="icon-li"><a href="whatsapp://send?phone={{company.phone}}"><i class="fa-brands fa-whatsapp" target="_blank"></i></a></li>
+          </ul>
+        </div>
+        <div class="footer-menu-ul">
+          <ul>
+            <li><a href="{% url 'home' %}">Ana Səhifə</a></li>
+            <li><a href="{% url 'about' %}">Haqqımızda</a></li>
+            <li><a href="{% url 'products' %}">Məhsullar</a></li>
+            <li><a href="{% url 'services' %}">Xidmətlər</a></li>
+            <li><a href="{% url 'contact' %}">Əlaqə</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-div-3">
+        <img class="img-2" src="{% static 'images/code-img.jpeg' %}" />
+      </div>
     </div>
     <div class="hr-div">
       <hr class="footer-hr" />

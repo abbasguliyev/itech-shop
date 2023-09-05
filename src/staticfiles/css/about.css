@@ -4,15 +4,12 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding-top: 10em;
-  padding-left: 8em;
-  padding-bottom: 10em;
-  padding-right: 8em;
-  margin-right: auto;
-  margin-left: auto;
+  padding: 10em 8em;
   min-height:70vh;
   flex:1;
-
+  background-color: #fff;
+  margin: 2em;
+  border-radius: 10px;
 }
 
 .about-img{

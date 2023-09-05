@@ -1,7 +1,7 @@
 {% load static %}
 
 <header>
-  <div class="container">
+  <div class="">
     <a class="logo" href="{% url 'home' %}"><img class="img" src="{% static 'images/itch-shp.jpeg' %}"/></a>
     <div class="hamburger">
       <div class="line"></div>
@@ -29,6 +29,9 @@
         </li>
         <li>
           <a class="{% if 'services' in request.path %}active{% endif %}" href="{% url 'services' %}">Xidmətlər</a>
+        </li>
+        <li>
+          <a class="{% if 'contact' in request.path %}active{% endif %}" href="{% url 'contact' %}">Əlaqə</a>
         </li>
         <li class="cart-icon">
           <a class="{% if 'cart' in request.path %}active{% endif %}" href="{% url 'cart' %}">

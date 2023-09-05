@@ -6,11 +6,12 @@
     {% for message in messages %}
     <div class="message-alert-body {% if message.tags == 'error' %} alert-danger {% else %} alert {% endif %} alert-dismissible fade show" role="alert">
         {{message}}
+        <button type="button" class="btn-close" style="color: #fff !important;" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endfor %} 
     {% endif %}
 </div>
-<div class="container">
+<div class="home-container">
     {% include 'partials/_section_header.html' %}
     <section class="section-contain">
         <div class="section-title-container">
@@ -108,38 +109,6 @@
             {% endif %}
             {% endif %}
         </div>
-    </section>
-    <section class="contact" id="contact">
-        <div class="section-title-container">
-            <h3 class="section-title"><b>Əlaqə</b></h3>
-        </div>
-        <form class="form" action="{% url 'contact' %}" method="POST">
-            {% csrf_token %}
-            <div class="form-div">
-                <div class="inputs-name">
-                    {{contact_form.first_name}} 
-                    {% for error in contact_form.first_name.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                    {% endfor %} {{contact_form.last_name}} 
-                    {% for error in contact_form.last_name.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {{contact_form.email}} 
-                {% for error in contact_form.email.errors%}
-                <span class="text-danger">{{ error }}</span>
-                {% endfor %} {{contact_form.phone}} 
-                {% for error in contact_form.phone.errors %}
-                <span class="text-danger">{{ error }}</span>
-                {% endfor %} {{contact_form.message}} 
-                {% for error in contact_form.message.errors %}
-                <span class="text-danger">{{ error }}</span>
-                {% endfor %}
-                <button class="contact-button btn-shadow">
-                    <a class="contact-button-p">Göndər</a>
-                </button>
-            </div>
-        </form>
     </section>
 </div>
 {% endblock content %}

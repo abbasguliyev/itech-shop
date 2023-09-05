@@ -28,29 +28,29 @@
     </div>
     
     <section class="post-carousel">
-    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% if banners is not None %}
-                {% for banner in banners %}
-                <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %} index-carousel" id="{{banner.pk}}">
-                    <img src="{{banner.image.url}}" class="d-block w-100 index-carousel-img " alt="{{banner.title}}">
-                </div>
-                {% endfor %}
-            {% else %}
-                <div class="carousel-item active index-carousel">
-                    <img src="{% static 'images/default2.jpg' %}" class="d-block w-100 index-carousel-img " alt="default">
-                </div>
-            {% endif %}
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% if banners is not None %}
+                    {% for banner in banners %}
+                    <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %} index-carousel" id="{{banner.pk}}">
+                        <img src="{{banner.image.url}}" class="d-block w-100 index-carousel-img " alt="{{banner.title}}">
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="carousel-item active index-carousel">
+                        <img src="{% static 'images/default2.jpg' %}" class="d-block w-100 index-carousel-img " alt="default">
+                    </div>
+                {% endif %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-        </button>
-    </div>
     </section>
     <section class="offer">
         <div class="offer-head">
@@ -70,7 +70,25 @@
                     {% if collection_prods.count != 0 %}
                     {% for product in collection_prods %}
                     <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %} index-carousel" id="{{product.pk}}">
-                        {% include 'product_cart.html' %}
+                        <div class="offer_product_wrapper" id="{{product.pk}}">
+                            <div onclick="location.href='{% url 'product_detail' product.slug %}';" class="prod_container">
+                                <span class="free_delivery_text">Pulsuz çatdırılma</span>
+                                <img src="{{product.image.url}}" alt="{{ product.name }}" class="product-img" />
+                                <div class="prod_detail">
+                                    <div>
+                                        <h4>
+                                            {{ product.name }}
+                                        </h4>
+                                        <p>{{ product.price }} AZN</p>
+                                    </div>
+                                </div>
+                                <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn">
+                                    {% csrf_token %}
+                                    <input type="hidden" value={{product.pk}} name="product">
+                                    <button type="submit">Səbətə at</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     {% endfor %}
                     {% else %}

@@ -11,11 +11,11 @@ class ContactForm(forms.ModelForm):
         'placeholder': 'Soyad'
     }))
     email = forms.EmailField(widget=forms.EmailInput(attrs={
-        'class': 'email-input',
+        'class': 'name-input',
         'placeholder': 'Email'
     }))
     phone = forms.CharField(widget=forms.TextInput(attrs={  
-        'class': 'email-input',
+        'class': 'name-input',
         'placeholder': 'Telefon'
     }))
     message = forms.CharField(widget=forms.Textarea(attrs={  
