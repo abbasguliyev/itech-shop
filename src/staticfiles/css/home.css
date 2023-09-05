@@ -56,6 +56,26 @@ footer {
     flex-wrap: wrap;
 }
 
+.footer-div-2 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3em;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+}
+
+.footer-menu-ul {
+    list-style: none;
+}
+
+
+.footer-menu-ul li a{
+    color: #fff;
+    font-size: 2em;
+}
+
 .img-1 {
     height: 20em;
     margin-left: 8em;
@@ -65,13 +85,26 @@ footer {
 
 .icon-ul {
     display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.icon-ul ul {
+    display: flex;
     flex-direction: row;
+    align-self: flex-start;
+}
+
+.icon-ul p {
+    align-self: center;
+    color: #fff;
+    font-size: 2em;
 }
 
 .icon-li {
     list-style-type: none;
     color: white !important;
-    font-size: 4.6em;
+    font-size: 4em;
     margin-right: 0.5em;
     cursor: pointer;
 }
@@ -251,7 +284,7 @@ footer {
 }
 
 .contact {
-    background-color: #fff;
+    background-color: #f1f1f1;
     border-radius: 10px;
     height: 100vh;
     display: flex;
@@ -260,34 +293,24 @@ footer {
 
 .contact-form {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
     width: 80em;
     margin-left: auto;
     margin-right: auto;
-    background-color: #012849;
-    padding: 8em;
+    background-color: #fff;
     border-radius: 10px;
-}
-
-.contact-form-div1 {
-    background-color: #cdbb2b;
-    width: 20%;
-}
-
-.contact-form-div2 {
-    background-color: #012849;
-    width: 80%;
+    padding: 10em;
 }
 
 .name-input {
     outline: none;
-    border: 1px solid #012849;
-    border-radius: 10px;
+    border: none;
+    border-bottom: 1px solid #012849;
     padding: 15px;
     margin-bottom: 10px;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .name-input:focus {
@@ -302,31 +325,14 @@ footer {
     color: #b9bec2;
 }
 
-.email-input {
-    height: 1.5em;
-    border-radius: 1em;
-    margin-top: 2em;
-    padding: 1em;
-    border-width: 0.02em;
-}
-
-.email-input:focus {
-    outline: none;
-}
-
-.email-input::placeholder {
-    font-size: 1.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #b9bec2;
-}
-
 .input-textarea {
     margin-top: 2em;
     height: 12em;
-    border-radius: 1em;
     padding: 1em;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #012849;
+    font-size: 1.5em;
 }
 
 .input-textarea:focus {
@@ -342,24 +348,25 @@ footer {
 }
 
 .contact-button {
-    background-color: #012849;
+    width: 100%;
+    outline: none;
     border: none;
-    height: 3.8em;
-    width: 11em;
-    border-radius: 1em;
-    box-shadow: rgba(0, 0, 0, 0.15) 0.3em 0.3em;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2em;
-    margin-top: 2em;
-    cursor: pointer;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 2em;
+    color: #fff;
+    background-color: #012849;
+    border-radius: 10px;
+    box-sizing: border-box;
+
 }
 
-.contact-button-p {
-    color: white;
-    font-size: 1.5em;
-    margin-top: auto;
-    margin-bottom: auto;
+.contact-button:hover {
+    color: #012849;
+    background-color: #fff;
+    border: 1px solid #012849;
+    transition: all ease 0.6s;
+    box-sizing: border-box;
 }
 
 .pagination {
@@ -399,8 +406,8 @@ footer {
 }
 
 .alert {
-    background-color: #d4edda;
-    color: #012849;
+    color: #fff !important;
+    background-color: #012849 !important;
     padding: 10px;
     border-radius: 5px;
 }
@@ -644,7 +651,7 @@ footer {
         flex-direction: column;
     }
 
-    .icon-ul {
+    .icon-ul ul {
         justify-content: center;
         align-items: center;
         align-self: center;
