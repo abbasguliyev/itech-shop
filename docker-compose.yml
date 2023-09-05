@@ -42,7 +42,9 @@ services:
     restart: always
     build: ./nginx
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./src/static:/src/static
+      - ./src/media:/src/media
+      - /etc/letsencrypt:/etc/letsencrypt
       - ./certs:/etc/nginx/certs
     ports:
       - "80:80"
