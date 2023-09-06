@@ -46,7 +46,6 @@ services:
       - ./src/media:/src/media
       - /etc/letsencrypt:/etc/letsencrypt
       - ./certs:/etc/nginx/certs
-      - html:/usr/share/nginx/html
       - vhost:/etc/nginx/vhost.d
       - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
