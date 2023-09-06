@@ -39,7 +39,9 @@ class CartListView(TemplateView):
     
     def get(self, request, *args: Any, **kwargs: Any):
         products = self.request.session.get("cart")
-        if len(products) == 0:
+        if products == None:
+            return redirect("home")
+        elif len(products) == 0:
             return redirect("home")
         return super().get(request, *args, **kwargs)
     

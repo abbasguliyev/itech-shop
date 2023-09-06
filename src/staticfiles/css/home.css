@@ -489,6 +489,12 @@ footer {
 .index-carousel-img {
     height: 63em !important;
     object-fit: cover !important;
+    border-radius: 10px;
+}
+
+.index-collection-img {
+    height: 50em !important;
+    object-fit: cover !important;
 }
 
 .offer {
