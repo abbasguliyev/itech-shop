@@ -68,6 +68,10 @@ volumes:
     driver: local
   html:
     driver: local
+  vhost:
+    driver: local
+  acme:
+    driver: local
 
 networks:
   itech-shop-network:
