@@ -3,6 +3,7 @@ from django import http
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, View
+from django.contrib import messages
 
 from apps.products.models import Product
 from apps.pages.models import Company
@@ -40,8 +41,10 @@ class CartListView(TemplateView):
     def get(self, request, *args: Any, **kwargs: Any):
         products = self.request.session.get("cart")
         if products == None:
+            messages.info(request, "Səbətdə məhsul yoxdur!")
             return redirect("home")
         elif len(products) == 0:
+            messages.info(request, "Səbətdə məhsul yoxdur!")
             return redirect("home")
         return super().get(request, *args, **kwargs)
     

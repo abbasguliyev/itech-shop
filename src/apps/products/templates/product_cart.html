@@ -19,12 +19,14 @@
     </div>
     <div class="prod-attr">
         {% for attribute in product.attributes.all %}
-            {% if attribute.show_cart == True %}
-            <div>
-                <b>{{attribute.title}}:</b>
-                <span>{{attribute.value}}</span>
-            </div>
-            {% endif %}
+            {% for attribute_value in attribute.attribute_values.all %}
+                {% if attribute_value.attribute.show_cart == True %}
+                <div>
+                    <b>{{attribute_value.attribute}}:</b>
+                    <span>{{attribute_value.value}}</span>
+                </div>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
     </div>
 </div>

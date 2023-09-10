@@ -26,7 +26,7 @@
                 <div class="home-product-slider">
                     <div>
                         {% if page_obj.has_previous %}
-                        <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+                        <a hx-get="{% url 'index_products_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#product_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
                         {% else %}
                         <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
                         {% endif %}
@@ -38,7 +38,7 @@
                     </div>
                     <div>
                         {% if page_obj.has_next %}
-                        <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+                        <a hx-get="{% url 'index_products_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#product_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
                         {% else %}
                         <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
                         {% endif %}
@@ -58,27 +58,33 @@
             </div>
         {% else %}
             <div class="service-body" id="service_id">
-                <div>
-                    {% if page_obj.has_previous %}
-                    <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
-                    {% else %}
-                    <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
-                    {% endif %}
-                    {% for service in services %}
-                    <div class="prod_container">
-                        <img src="{{ service.image.url }}" alt="{{ service.name }}" class="product-img"/>
-                        <div class="prod_detail">
-                            <div>
-                                <h4>{{ service.name }}</h4>
+                <div class="home-product-slider">
+                    <div>
+                        {% if page_obj.has_previous %}
+                        <a hx-get="{% url 'index_services_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#service_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+                        {% else %}
+                        <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% for service in services %}
+                        <div class="serv_container">
+                            <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-img"/>
+                            <div class="serv_detail">
+                                <div>
+                                    <h4>{{ service.name }}</h4>
+                                </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                    <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
-                    {% else %}
-                    <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
-                    {% endif %}
+                    <div>
+                        {% if page_obj.has_next %}
+                        <a hx-get="{% url 'index_services_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#service_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+                        {% else %}
+                        <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
+                        {% endif %}
+                    </div>
                 </div>
                 <a href="{% url 'services' %}" class="btn-more">Bütün xidmətləri gör</a>
             </div>

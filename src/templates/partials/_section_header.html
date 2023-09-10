@@ -1,31 +1,49 @@
 {% load static %}
 <section class="header-container">
     <div class="category">
-        <ul>
+        <ul class="main-ul">
             {% for category in categories %}
-            {% if category.parent == None %}
-            <li>
+            <li class="category-dropdown">
                 <a href="">
-                    <img src="{{ category.icon.url }}" alt="">
+                    {% if category.icon.url is not None %}
+                    <img src="{{ category.icon.url }}" alt="category.name">
+                    {% endif %}
                     <p>{{ category.name }}</p>
-                    <ul class="children">
-                        <li>
-                            {% for ct in category.children.all %}
+                </a>
+                <hr>
+                {% if category.children.all.count != 0 %}
+                <div class="category-children">
+                    <ul class="row">
+                        {% for ct in category.children.all %}
+                        <li class="col-sm-3">
                             <a href="">
-                                <img src="{{ ct.icon.url }}" alt="">
+                                {% if ct.icon.url is not None %}
+                                <img src="{{ ct.icon.url }}" alt="ct.name">
+                                {% endif %}
                                 <p>{{ ct.name }}</p>
                             </a>
                             <hr>
-                            {% endfor %}
+                            <ul class="category-children-children">
+                                {% for c in ct.children.all %}
+                                <li>
+                                    <a href="">
+                                        {% if c.icon.url is not None %}
+                                        <img src="{{ c.icon.url }}" alt="c.name">
+                                        {% endif %}
+                                        <p>{{ c.name }}</p>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
                         </li>
+                        {% endfor %}
                     </ul>
-                </a>
-                <hr>
+                </div>
+                {% endif %}
             </li>
-            {% endif %}
             {% endfor %}
         </ul>
-    </div>    
+    </div>
     <section class="post-carousel">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">

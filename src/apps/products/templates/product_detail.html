@@ -46,10 +46,14 @@
             <div class="product_detail_attr">
                 <p>Xüsusiyyətlər</p>
                 {% for attribute in product.attributes.all %}
-                <div>
-                    <b>{{attribute.title}}:</b>
-                    <span>{{attribute.value}}</span>
-                </div>
+                    {% for attribute_value in attribute.attribute_values.all %}
+                        {% if attribute_value.attribute.show_cart == True %}
+                        <div>
+                            <b>{{attribute_value.attribute}}:</b>
+                            <span>{{attribute_value.value}}</span>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
             </div>
         </div>

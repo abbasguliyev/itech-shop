@@ -11,7 +11,7 @@ from django.forms.models import model_to_dict
 
 from apps.pages.models import Company
 
-from apps.products.models import Product, Category, Discount, AttributeValues
+from apps.products.models import Product, Category, Discount
 from apps.products import filters, enums
 
 
@@ -41,6 +41,7 @@ class ProductView(ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
+        context["categories"] = Category.objects.all()
         company = Company.objects.all().last()
         context['company'] = company
 
@@ -54,14 +55,6 @@ class ProductView(ListView):
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context['page_obj'] = page_obj
-        
-        if self.request.GET.get('category') is not None:
-            context['current_category'] = Category.objects.filter(pk=self.request.GET.get('category')).last()
-        else:
-            context['current_category'] = None
-
-        context['attribute_values'] = AttributeValues.objects.select_related('attribute').all()
-        
         return context
     
 class ProductDetailView(DetailView):
@@ -72,4 +65,20 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['company'] = Company.objects.all().last()
+        return context
+    
+class IndexProductsPaginationView(ListView):
+    model = Product
+    paginate_by = 3
+    template_name = "products_index_pagination.html"
+    context_object_name = "products"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        products = Product.objects.select_related('category').prefetch_related('attributes').all()
+        paginator = Paginator(products, self.paginate_by)
+        page = self.request.GET.get('page')
+        page_obj = paginator.get_page(page)
+        products = paginator.page(page)
+        context["page_obj"] = page_obj
         return context

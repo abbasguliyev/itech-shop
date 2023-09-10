@@ -14,18 +14,19 @@ from apps.pages.forms import ContactForm
 
 class IndexView(ListView):
     model = Product
-    paginate_by = 5
+    paginate_by = 3
     template_name = "home.html"
     context_object_name = "products"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        services = Services.objects.all()
+        services = Services.objects.all()[:3]
         company = Company.objects.all().last()
-        categories = Category.objects.select_related('parent').all()
+        categories = Category.objects.select_related('parent').filter(parent=None).all()
+        print(f"**********{categories=}")
         partners = Partners.objects.all()[:3]
         banners = Banner.objects.filter(is_active=True)
-        collection = Collection.objects.prefetch_related('products').filter(is_active=True, end_date__lte=datetime.datetime.today()).order_by("pk").last()
+        collection = Collection.objects.prefetch_related('products').filter(is_active=True, end_date__gte=datetime.datetime.today()).order_by("pk").last()
         if collection is not None:
             if collection.products.all() is not None:
                 collection_prods = list(collection.products.order_by("pk").all())
@@ -72,7 +73,7 @@ class ContactView(View):
 
 class IndexPartnersPaginationView(ListView):
     model = Partners
-    paginate_by = 5
+    paginate_by = 3
     template_name = "partners_index_pagination.html"
     context_object_name = "partners"
 
@@ -86,3 +87,34 @@ class IndexPartnersPaginationView(ListView):
         context["page_obj"] = page_obj
         return context
     
+class IndexProductsPaginationView(ListView):
+    model = Product
+    paginate_by = 3
+    template_name = "products_index_pagination.html"
+    context_object_name = "products"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        products = Product.objects.select_related('category').prefetch_related('attributes').all()
+        paginator = Paginator(products, self.paginate_by)
+        page = self.request.GET.get('page')
+        page_obj = paginator.get_page(page)
+        products = paginator.page(page)
+        context["page_obj"] = page_obj
+        return context
+    
+class IndexServicesPaginationView(ListView):
+    model = Services
+    paginate_by = 3
+    template_name = "services_index_pagination.html"
+    context_object_name = "services"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        services = Services.objects.all()
+        paginator = Paginator(services, self.paginate_by)
+        page = self.request.GET.get('page')
+        page_obj = paginator.get_page(page)
+        services = paginator.page(page)
+        context["page_obj"] = page_obj
+        return context

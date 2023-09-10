@@ -12,45 +12,63 @@
     </div>
 </div>
 <div class="products-container">
-    <div class="products-filter">
-        <form action="{% url 'products' %}" method="GET" class="select-form">
-            <fieldset>
-                <p>Kateqoriya</p>
-                <div class="products-filter-category">
-                    {{filter.form.category}}
-                </div>
-            </fieldset>
-            <button type="submit">Axtar</button>
-        </form>
-    </div>
-    <div class="products-carts">
-        <div class="products-div">
-            {% if products.count == 0 %}
-                <p style="font-size: 2em; text-align: center;">Məhsul tapılmadı</p>
-            {% else %}
-                {% for product in products %}
-                {% include 'product_cart.html' %}
-                {% endfor %}
-            {% endif %}
+    {% if current_category is not None %}
+    <div class="products-category">
+        <div class="products-current-category">
+            {{ current_category.name }}
         </div>
-        <div class="pagination">
-            {% if page_obj.has_previous %}
-                <a href="{% url request.resolver_match.url_name %}?page={{ page_obj.previous_page_number }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><span aria-hidden="true">&laquo;</span></a>
-            {% endif %}
-        
-            {% for i in page_obj.paginator.page_range %}
-                {% if page_obj.number == i %}
-                    <a href="#" class="active">{{ i }}</a>
-                {% else %}
-                    <a href="{% url request.resolver_match.url_name %}?page={{ i }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ i }}</a>
+        <div class="row products-category-subcategories-container">
+            {% for ct in current_category.children.all %}
+            <div class="col-sm-2 products-category-subcategory">
+                {% if ct.icon.url is not None %}
+                <img src="{{ ct.icon.url }}" alt="ct.name">
                 {% endif %}
+                <p>{{ ct.name }}</p>
+            </div>
             {% endfor %}
-        
-            {% if page_obj.has_next %}
-                <a href="{% url request.resolver_match.url_name %}?page={{ page_obj.next_page_number }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><span aria-hidden="true">&raquo;</span></a>
-            {% endif %}
         </div>
     </div>
-
+    {% endif %}
+    <div class="products-datas">
+        <div class="products-filter">
+            <form action="{% url 'products' %}" method="GET" class="select-form">
+                <fieldset>
+                    <p>Filter</p>
+                    <div class="products-filter-category">
+                        {{filter.form.attribute_values}}
+                    </div>
+                </fieldset>
+                <button type="submit">Axtar</button>
+            </form>
+        </div>
+        <div class="products-carts">
+            <div class="products-div">
+                {% if products.count == 0 %}
+                    <p style="font-size: 2em; text-align: center;">Məhsul tapılmadı</p>
+                {% else %}
+                    {% for product in products %}
+                    {% include 'product_cart.html' %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <a href="{% url request.resolver_match.url_name %}?page={{ page_obj.previous_page_number }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><span aria-hidden="true">&laquo;</span></a>
+                {% endif %}
+            
+                {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <a href="#" class="active">{{ i }}</a>
+                    {% else %}
+                        <a href="{% url request.resolver_match.url_name %}?page={{ i }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ i }}</a>
+                    {% endif %}
+                {% endfor %}
+            
+                {% if page_obj.has_next %}
+                    <a href="{% url request.resolver_match.url_name %}?page={{ page_obj.next_page_number }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><span aria-hidden="true">&raquo;</span></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
   {% endblock content %}

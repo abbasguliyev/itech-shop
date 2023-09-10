@@ -46,6 +46,9 @@ services:
       - ./src/media:/src/media
       - /etc/letsencrypt:/etc/letsencrypt
       - ./certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+      - acme:/etc/acme.sh
     ports:
       - "443:443"
       - "80:80"

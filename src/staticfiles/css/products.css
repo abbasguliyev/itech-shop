@@ -1,10 +1,57 @@
 .products-container {
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: #F1F1F1;
+    box-sizing: border-box !important;
+}
+
+.products-category {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.products-current-category {
+    background-color: #fff;
+    font-size: 2em;
+    margin: 1em 2em;
+    padding: 1.4em;
+    border-radius: 10px;
+}
+
+.products-category-subcategories-container {
+    width: 100%;
+    padding: 1.4em;
+    justify-content: center;
+}
+
+.products-category-subcategory {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #fff;
+    margin: 1em 1em;
+    border-radius: 10px;
+    padding: 2em;
+    font-size: 1.4em;
+}
+
+.products-category-subcategory img{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+
+.products-datas {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    flex:1;
-    min-height: 70vh;
     background-color: #F1F1F1;
+    height: 100vh;
+    margin-bottom: 5em;
     box-sizing: border-box !important;
 }
 
@@ -12,19 +59,19 @@
     display: flex;
     flex-direction: column;
     width: 20%;
+    height: 100vh;
+
     padding: 2em;
     background-color: #fff;
     border-radius: 10px;
     box-sizing: border-box !important;
     margin: 2em;
-    overflow: auto;
 }
 
 .products-filter form {
     display: flex;
     flex-direction: column;
     font-size: 2em;
-    height: 100%;
     justify-content: space-between;
     align-items: flex-start;
 }
@@ -33,7 +80,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+}
 
+.products-filter-category {
+    height: 85vh;
+    overflow: auto;
 }
 
 .products-filter-category div div {
@@ -69,17 +120,15 @@
 }
 
 
-
 .products-carts {
-    align-self: center;
     background-color: #fff;
     border-radius: 10px;
     margin-top: 2em;
-    margin-bottom: 2em;
     padding: 2em;
     width: 77%;
+    height: 100vh;
+
     box-sizing: border-box !important;
-    min-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
