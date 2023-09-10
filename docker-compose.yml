@@ -66,6 +66,8 @@ volumes:
     driver: local
   web:
     driver: local
+  html:
+    driver: local
 
 networks:
   itech-shop-network:
