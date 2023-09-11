@@ -106,15 +106,37 @@ span {
 .cart-prod-price {
     width: 5em;
     display: flex;
-    flex-direction: row !important; 
+    flex-direction: column !important; 
     justify-content: center !important;
     align-items: center !important;
     align-self: center !important;
 }
-.cart-prod-price p {
-    align-self: center !important;
+
+.cart-prod-normal-price {
+    width: 5em;
+    display: flex;
+    flex-direction: row !important; 
+    justify-content: center !important;
+}
+
+.cart-prod-discount-price {
+    width: 5em;
+    display: flex;
+    flex-direction: row !important; 
+    justify-content: center !important;
+
+}
+
+.cart-prod-discount-price b {
+    margin-right: 0;
+}
+
+.cart-prod-normal-price b {
     margin-right: 0.5em;
-    text-align: center
+}
+
+.cart-prod-normal-price del {
+    margin-right: 5px;
 }
 
 .cart-delete-icon {

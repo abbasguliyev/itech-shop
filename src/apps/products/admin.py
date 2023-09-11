@@ -48,6 +48,15 @@ class DiscountAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'title', 'end_date')
     search_fields = ('title',)
 
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "product":
+            # İlgili özelliği seçmek için bir dropdown menü oluşturun
+            kwargs["widget"] = admin.widgets.FilteredSelectMultiple(
+                db_field.verbose_name,
+                is_stacked=False,
+            )
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'slug', 'is_active', 'created_at', 'end_date')
@@ -55,6 +64,15 @@ class CollectionAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'title')
     search_fields = ('title', 'slug')
     prepopulated_fields = {"slug": ['title']}
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "products":
+            # İlgili özelliği seçmek için bir dropdown menü oluşturun
+            kwargs["widget"] = admin.widgets.FilteredSelectMultiple(
+                db_field.verbose_name,
+                is_stacked=False,
+            )
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
 
 @admin.register(ProductAttribute)
 class ProductAttributeAdmin(admin.ModelAdmin):

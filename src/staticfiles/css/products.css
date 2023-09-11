@@ -413,6 +413,10 @@
     color: #012849;
 }
 
+.product-detail-price del h3 {
+    font-weight: 400;
+}
+
 .product_detail_category {
     display: flex;
     justify-content: space-between;
