@@ -44,7 +44,7 @@ services:
     volumes:
       - ./src/static:/src/static
       - ./src/media:/src/media
-      - /etc/letsencrypt:/etc/letsencrypt
+      - /etc/ssl:/etc/ssl
       - ./certs:/etc/nginx/certs
       - html:/usr/share/nginx/html
       - vhost:/etc/nginx/vhost.d
