@@ -44,13 +44,7 @@ services:
     volumes:
       - ./src/static:/src/static
       - ./src/media:/src/media
-      - /etc/letsencrypt:/etc/letsencrypt
-      - ./certs:/etc/nginx/certs
-      - html:/usr/share/nginx/html
-      - vhost:/etc/nginx/vhost.d
-      - acme:/etc/acme.sh
     ports:
-      - "443:443"
       - "80:80"
     depends_on:
       - itech_shop_web
@@ -65,12 +59,6 @@ volumes:
   media:
     driver: local
   web:
-    driver: local
-  html:
-    driver: local
-  vhost:
-    driver: local
-  acme:
     driver: local
 
 networks:
