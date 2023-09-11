@@ -38,18 +38,6 @@ services:
       - .env
     depends_on:
       - itech_shop_db
-  nginx:
-    restart: always
-    build: ./nginx
-    volumes:
-      - ./src/static:/src/static
-      - ./src/media:/src/media
-    ports:
-      - "80:80"
-    depends_on:
-      - itech_shop_web
-    networks:
-      - itech-shop-network
 
 volumes:
   postgres_data:
