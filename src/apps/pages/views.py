@@ -23,7 +23,6 @@ class IndexView(ListView):
         services = Services.objects.all()[:3]
         company = Company.objects.all().last()
         categories = Category.objects.select_related('parent').filter(parent=None).all()
-        print(f"**********{categories=}")
         partners = Partners.objects.all()[:3]
         banners = Banner.objects.filter(is_active=True)
         collection = Collection.objects.prefetch_related('products').filter(is_active=True, end_date__gte=datetime.datetime.today()).order_by("pk").last()

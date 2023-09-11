@@ -14,19 +14,37 @@
 <div class="products-container">
     {% if current_category is not None %}
     <div class="products-category">
-        <div class="products-current-category">
-            {{ current_category.name }}
-        </div>
+        <a href="{% url 'products' %}?category={{current_category.pk}}" class="products-current-category">
+            <b>Kateqoriya: </b>{{ current_category.name }}
+        </a>
+        {% if current_category.parent is not None %}
+        <a href="{% url 'products' %}?category={{current_category.parent.pk}}" class="products-current-category">
+            <b>Üst kateqoriya: </b>{{ current_category.parent.name }}
+        </a>
+        {% endif %}
         <div class="row products-category-subcategories-container">
             {% for ct in current_category.children.all %}
-            <div class="col-sm-2 products-category-subcategory">
+            <a href="{% url 'products' %}?category={{ct.pk}}" class="col-sm-2 products-category-subcategory">
+                <b style="margin-right: 5px;">Alt kateqoriya:</b>
                 {% if ct.icon.url is not None %}
                 <img src="{{ ct.icon.url }}" alt="ct.name">
                 {% endif %}
                 <p>{{ ct.name }}</p>
-            </div>
+            </a>
             {% endfor %}
         </div>
+    </div>
+    {% else %}
+    <div class="row products-category-subcategories-container">
+        {% for category in categories %}
+        <a href="{% url 'products' %}?category={{category.pk}}" class="col-sm-2 products-category-subcategory">
+            <b style="margin-right: 5px;">Kateqoriya:</b>
+            {% if category.icon.url is not None %}
+            <img src="{{ category.icon.url }}" alt="category.name">
+            {% endif %}
+            <p>{{ category.name }}</p>
+        </a>
+        {% endfor %}
     </div>
     {% endif %}
     <div class="products-datas">
@@ -35,6 +53,12 @@
                 <fieldset>
                     <p>Filter</p>
                     <div class="products-filter-category">
+                        <div style="display:none;">
+                            {{filter.form.name}}
+                        </div>
+                        <div style="display:none;">
+                            {{filter.form.category}}
+                        </div>
                         {{filter.form.attribute_values}}
                     </div>
                 </fieldset>

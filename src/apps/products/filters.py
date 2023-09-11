@@ -9,14 +9,23 @@ class ProductFilter(django_filters.FilterSet):
         'class': 'var-input',
         'name': 'name'
     }), required=False)
-    category = django_filters.ModelMultipleChoiceFilter(queryset = Category.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False)
-    attributes = django_filters.ModelMultipleChoiceFilter(queryset = ProductAttribute.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False)
+    category = django_filters.ModelMultipleChoiceFilter(queryset = Category.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False, method='filter_category')
     attribute_values = django_filters.ModelMultipleChoiceFilter(queryset = AttributeValues.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False, method='filter_attribute_values')
 
     def filter_attribute_values(self, queryset, name, value):
-        print(f"####################{value=}")
-        return queryset.filter()
+        if value:
+            queryset = queryset.filter(attributes__attribute_values__in=value)
+        else:
+            queryset = queryset
+        return queryset
+    
+    def filter_category(self, queryset, name, value):
+        if value:
+            queryset = queryset.filter(Q(category__in=value) | Q(category__parent__in=value))
+        else:
+            queryset = queryset
+        return queryset
 
     class Meta:
         model = Product
-        fields = {'name', 'category', 'attributes'}
+        fields = {'name', 'category'}

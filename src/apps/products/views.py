@@ -1,7 +1,7 @@
 from typing import Any, Dict
 from django.db import models
 from django.db.models.query import QuerySet
-from django.db.models import OuterRef, Subquery, Max, When, Case, Value, F, Q, DecimalField
+from django.db.models import OuterRef, Subquery, Max, Min, When, Case, Value, F, Q, DecimalField
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
@@ -22,11 +22,6 @@ class ProductView(ListView):
     context_object_name = "products"
 
     def get_queryset(self) -> QuerySet[Any]:
-        # queryset = super().get_queryset().annotate(
-        #     discount_type=Max('discounts__discount_type', filter=models.Q(discounts__is_active=True)),
-        #     discount_amount=Max('discounts__amount', filter=models.Q(discounts__is_active=True)),
-        #     discount_end_date=Max('discounts__end_date', filter=models.Q(discounts__is_active=True)),
-        # )
         queryset = super().get_queryset().annotate(
             discount_amount=Max(Case(
                 When(Q(discounts__discount_type=enums.DiscountType.FIXED) & Q(discounts__is_active=True), then=F('price') - F('discounts__amount')),
@@ -40,7 +35,7 @@ class ProductView(ListView):
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.all()
+        context["categories"] = Category.objects.filter(parent=None).all()
         company = Company.objects.all().last()
         context['company'] = company
 
@@ -68,6 +63,17 @@ class ProductDetailView(DetailView):
     model = Product
     template_name="product_detail.html"
     context_object_name = "product"
+
+    def get_queryset(self) -> QuerySet[Any]:
+        queryset = super().get_queryset().annotate(
+            discount_amount=Max(Case(
+                When(Q(discounts__discount_type=enums.DiscountType.FIXED) & Q(discounts__is_active=True), then=F('price') - F('discounts__amount')),
+                When(Q(discounts__discount_type=enums.DiscountType.PERCENTAGE) & Q(discounts__is_active=True), then=F('price') * F('discounts__amount') / 100),
+                output_field=DecimalField(max_digits=10, decimal_places=2),
+                ),
+            )
+        )
+        return queryset
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)

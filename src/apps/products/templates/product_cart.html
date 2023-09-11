@@ -8,7 +8,12 @@
                 <h4>
                     {{ product.name }}
                 </h4>
-                <p>{{ product.price }} AZN</p>
+                {% if product.discount_amount is None %}
+                <b><p>{{ product.price }} AZN</p></b>
+                {% else %}
+                <del><p>{{ product.price }} AZN</p></del>
+                <b><p>{{ product.discount_amount|floatformat:2  }} AZN</p></b>
+                {% endif %}
             </div>
         </div>
         <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn">

@@ -33,9 +33,23 @@
             </div>
           </div>
           <div class="cart-prod-price">
-            <p id="cart-prod-price-id">{{product.price}}</p>
-            <p id="cart-prod-default-price-id" style="display:none;">{{product.price}}</p>
-            <p>AZN</p>
+            {% if product.discount_amount is None %}
+            <div class="cart-prod-normal-price">
+              <b><p id="cart-prod-price-id">{{product.price}}</p></b>
+              <p id="cart-prod-default-price-id" style="display:none;">{{product.price}}</p>
+              <b><p>AZN</p></b>
+            </div>
+            {% else %}
+            <div class="cart-prod-normal-price">
+              <del><p>{{product.price}}</p></del>
+              <p>AZN</p>
+            </div>
+            <div class="cart-prod-discount-price">
+              <b><p id="cart-prod-price-id">{{ product.discount_amount|floatformat:2 }}</p></b>
+              <p id="cart-prod-default-price-id" style="display:none;">{{product.discount_amount}}</p>
+              <b><p>AZN</p></b>
+            </div>
+            {% endif %}
           </div>
           <div class="cart-delete-icon">
             <form action="{% url 'delete_prod_from_cart' product.pk %}" method="post">

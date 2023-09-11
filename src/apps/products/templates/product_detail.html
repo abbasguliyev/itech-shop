@@ -22,9 +22,18 @@
                     <h3>
                         {{product.name}}
                     </h3>
-                    <h3>
-                        {{product.price}} AZN
-                    </h3>
+                    <div class="product-detail-price">
+                        {% if product.discount_amount is None %}
+                        <h3>
+                            {{product.price}} AZN
+                        </h3>
+                        {% else %}
+                        <del><h3>{{product.price}} AZN</h3></del>
+                        <h3>
+                            {{product.discount_amount|floatformat:2}} AZN
+                        </h3>
+                        {% endif %}
+                    </div>
                 </div>
                 <hr>
                 <div class="product_detail_category">

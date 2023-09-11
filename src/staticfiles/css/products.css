@@ -14,10 +14,13 @@
 
 .products-current-category {
     background-color: #fff;
+    color: #012849;
     font-size: 2em;
     margin: 1em 2em;
     padding: 1.4em;
     border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .products-category-subcategories-container {
@@ -29,8 +32,10 @@
 .products-category-subcategory {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     background-color: #fff;
+    color: #012849;
     margin: 1em 1em;
     border-radius: 10px;
     padding: 2em;
@@ -127,7 +132,7 @@
     padding: 2em;
     width: 77%;
     height: 100vh;
-
+    overflow: auto;
     box-sizing: border-box !important;
     display: flex;
     flex-direction: column;
