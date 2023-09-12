@@ -6,11 +6,13 @@ from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db.models import OuterRef, Subquery, Max, Min, When, Case, Value, F, Q, DecimalField
 
 from apps.pages.models import Contact, Company, Partners
-from apps.products.models import Product, Category, Banner, Collection
 from apps.services.models import Services
 from apps.pages.forms import ContactForm
+from apps.products.models import Product, Category, Banner, Collection
+from apps.products import filters, enums
 
 class IndexView(ListView):
     model = Product
@@ -28,7 +30,15 @@ class IndexView(ListView):
         collection = Collection.objects.prefetch_related('products').filter(is_active=True, end_date__gte=datetime.datetime.today()).order_by("pk").last()
         if collection is not None:
             if collection.products.all() is not None:
-                collection_prods = list(collection.products.order_by("pk").all())
+                collection_prods = list(collection.products.order_by("pk").all().annotate(
+                        discount_amount=Max(Case(
+                            When(Q(discounts__discount_type=enums.DiscountType.FIXED) & Q(discounts__is_active=True), then=F('price') - F('discounts__amount')),
+                            When(Q(discounts__discount_type=enums.DiscountType.PERCENTAGE) & Q(discounts__is_active=True), then=F('price') * F('discounts__amount') / 100),
+                            output_field=DecimalField(max_digits=10, decimal_places=2),
+                            ),
+                        )
+                    )
+                )
             else:
                 collection_prods = list()
         else:

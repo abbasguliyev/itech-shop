@@ -63,6 +63,13 @@ header div {
     margin-left: 200px !important;
 }
 
+.search form {
+    display: flex !important;
+    flex-direction: row;
+    width: 100% !important;
+
+}
+
 .search form input {
     width: 40em;
     height: 4em;
@@ -91,8 +98,48 @@ header div {
     background-color: #f2f2f2;
 }
 
+.hamburger-search {
+    margin-top: 20px !important;
+    display: none;
+    width: 100%;
+}
 
-@media only screen and (max-width: 1400px) {
+.hamburger-search form {
+    width: 100% !important;
+
+}
+
+.hamburger-search form input {
+    width: 40em;
+    height: 4em;
+    padding: 1.2em;
+    border-radius: 15px 0 0 15px;
+    border: none;
+    outline: none;
+    font-size: 1.2em;
+    display: inline-block;
+    line-height: inherit;
+}
+
+.hamburger-search form input::placeholder {
+    font-size: 1.4em;
+}
+
+.hamburger-search form button{
+    width: 4em;
+    height: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    padding: 1.2em;
+    border-radius: 0 15px 15px 0;
+    background-color: #012849;
+    color: #f2f2f2;
+}
+
+
+@media only screen and (max-width: 1450px) {
     header {
         padding: 0 50px;
     }
@@ -103,25 +150,19 @@ header div {
 }
 
 
-@media only screen and (max-width: 1320px) {
+@media only screen and (max-width: 1359px) {
     header {
         padding: 0 50px;
     }
     .search {
         margin-left: 10px !important;
     }
-}
-
-
-@media only screen and (max-width: 1220px) {
-    header {
-        padding: 0 50px;
-    }
+    
     .search form input {
-        font-size: 0.9em;
+        font-size: 0.8em;
     }
     .search form button{
-        font-size: 0.9em;
+        font-size: 0.8em;
     }
 }
 
@@ -136,6 +177,7 @@ header div {
     .search form input {
         width: 30em;
         height: 3em;
+        font-size: 0.8em;
     }
 
     .search form input::placeholder {
@@ -145,6 +187,7 @@ header div {
     .search form button{
         width: 3em;
         height: 3em;
+        font-size: 0.8em;
     }
 }
 
@@ -153,6 +196,24 @@ header div {
     header {
         padding: 0 30px;
     }
+    
+    .search {
+        display: none;
+    }
+
+    .hamburger-search {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hamburger-search form {
+        display: flex !important;
+        flex-direction: row;
+        width: 100% !important;
+
+    }
+
 }
 
 
@@ -160,7 +221,21 @@ header div {
     .search {
         display: none;
     }
+
+    header div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 0;
+        margin-right: 0;
+    }
     
+    .img {
+        height: 3.5em;
+        padding-top: 15px;
+        align-self: center;
+    }
+
     .hamburger {
         display: block;
         cursor: pointer;
@@ -183,19 +258,19 @@ header div {
         background-color: #012849;
         transition: 0.5s;
         overflow: hidden;
+        z-index: 9999999999999 !important;
     }
 
     .nav-bar.active {
         height: 450px;
-        z-index: 10000000;
-
+        z-index: 9999999999999 !important;
     }
 
     .nav-bar ul {
-        display: block;
-        width: fit-content;
-        margin: 80px auto 0 auto;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         transition: 0.5s;
         opacity: 0;
     }
@@ -208,6 +283,35 @@ header div {
         margin-bottom: 12px;
 
     }
+
+    .hamburger-search form input {
+        font-size: 1em;
+    }
+
+    .hamburger-search form input::placeholder {
+        font-size: 1em;
+    }
+
+    .hamburger-search form button{
+        font-size: 1em;
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
+    .hamburger-search form input {
+        font-size: 0.9em;
+        width: 30em;
+    }
+
+    .hamburger-search form input::placeholder {
+        font-size: 0.9em;
+    }
+
+    .hamburger-search form button{
+        font-size: 0.9em;
+    }
+
 }
 
 @media only screen and (max-width: 430px) {

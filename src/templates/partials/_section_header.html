@@ -43,6 +43,19 @@
             </li>
             {% endfor %}
         </ul>
+        <div class="home-main-categories">
+            <p>Əsas Kateqoriyalar:</p>
+            <div class="home-main-categories-container">
+                {% for category in categories %}
+                <a href="{% url 'products' %}?category={{category.pk}}" class="home-main-categories-subcategory">
+                    {% if category.icon.url is not None %}
+                    <img src="{{ category.icon.url }}" alt="category.name">
+                    {% endif %}
+                    <p>{{ category.name }}</p>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
     </div>
     <section class="post-carousel">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -88,15 +101,22 @@
                         {% for product in collection_prods %}
                         <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %} index-carousel" id="{{product.pk}}">
                             <div class="offer_product_wrapper" id="{{product.pk}}">
-                                <div onclick="location.href='{% url 'product_detail' product.slug %}';" class="prod_container">
+                                <div onclick="location.href='{% url 'product_detail' product.slug %}';" class="home_prod_container">
                                     <span class="free_delivery_text">Pulsuz çatdırılma</span>
-                                    <img src="{{product.image.url}}" alt="{{ product.name }}" class="product-img" />
-                                    <div class="prod_detail">
-                                        <div>
-                                            <h4>
-                                                {{ product.name }}
-                                            </h4>
-                                            <p>{{ product.price }} AZN</p>
+                                    <div class="home_prod_img_detail_container">
+                                        <img src="{{product.image.url}}" alt="{{ product.name }}" class="product-img" />
+                                        <div class="home_prod_detail">
+                                            <div>
+                                                <h4>
+                                                    {{ product.name }}
+                                                </h4>
+                                                {% if product.discount_amount is None %}
+                                                <b><p>{{ product.price }} AZN</p></b>
+                                                {% else %}
+                                                <del><p>{{ product.price }} AZN</p></del>
+                                                <b><p>{{ product.discount_amount|floatformat:2  }} AZN</p></b>
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
                                     <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn">
@@ -114,14 +134,14 @@
                     </div>
                     {% endif %}
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselBannerFade" data-bs-slide="prev">
+                {% comment %} <button class="carousel-control-prev" type="button" data-bs-target="#carouselBannerFade" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselBannerFade" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
-                </button>
+                </button> {% endcomment %}
             </div>
         </div>
     </section>
