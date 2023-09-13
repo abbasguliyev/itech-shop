@@ -44,7 +44,7 @@ footer {
 .footer-div {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between;    
     flex-wrap: wrap;
     width: 100%;
 }
@@ -290,7 +290,7 @@ footer {
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
-    width: 80em;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     background-color: #fff;
@@ -305,6 +305,7 @@ footer {
     padding: 15px;
     margin-bottom: 10px;
     font-size: 1.5em;
+    width: 100%;
 }
 
 .name-input:focus {
@@ -327,6 +328,7 @@ footer {
     outline: none;
     border-bottom: 1px solid #012849;
     font-size: 1.5em;
+    width: 100%;
 }
 
 .input-textarea:focus {
@@ -395,6 +397,7 @@ footer {
     bottom: 10px;
     right: 10px;
     font-size: 2em;
+    z-index: 1000000;
 }
 
 .alert {
@@ -925,53 +928,105 @@ ul {
         margin-top: 10px;
         color: #012849;
     }
-   
 }
-
-@media only screen and (max-width: 870px) {
-    footer {
-        justify-content: center;
-        align-items: center;
-    }
-
+@media only screen and (max-width: 1030px) {
     .footer-div {
-        justify-content: center;
-        align-items: center;
+        display: flex;
         flex-direction: column;
+        justify-content: center;  
+        align-items: center;  
+        width: 100%;
     }
 
     .footer-div-1 {
         justify-content: center;
         align-items: center;
-        flex-direction: column;
     }
 
-    .icon-ul ul {
+    .footer-div-2 {
+        margin-bottom: 2em;
+    }
+    .footer-div-3 {
+        display: flex;
         justify-content: center;
         align-items: center;
-        align-self: center;
+    }
+
+    .footer-menu-ul {
+        list-style: none;
+    }
+
+
+    .footer-menu-ul li a{
+        color: #fff;
+        font-size: 2em;
     }
 
     .img-1 {
-        height: 20em;
+        height: 17em;
         margin-left: 0;
         margin-right: 0;
-        margin-top: 0;
+        margin-top: 0.5em;
+    }
+
+    .icon-ul p {
+        font-size: 1.8em;
+    }
+
+    .icon-li {
+        font-size: 3em;
     }
 
     .img-2 {
         height: 15em;
-        margin-top: 4em;
+        margin-top: 0;
         margin-right: 0;
     }
 
-    .cov-div-p {
-        height: 3em;
-        width: 40em;
+    .hr-div {
+        width: 100%;
     }
 
-    .cov-p {
+    .footer-hr {
+        border-color: wheat;
+        margin-top: 2em;
+    }
+
+    .footer-div-p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 1.5em;
+    }
+
+    .footer-p {
+        color: white;
         font-size: 2em;
+    }
+
+}
+
+@media only screen and (max-width: 992px) {
+    .contact-form {
+        width: 100%;
+        margin-left: 1em;
+        margin-right: 1em;
+        padding: 5em;
+    }
+    
+    
+    .name-input {
+        font-size: 1.2em;
+    }
+
+    .input-textarea {
+        font-size: 1.2em;
+    }
+
+    .contact-button {
+        font-size: 1.4em;
     }
 }
 
@@ -982,6 +1037,25 @@ ul {
     .home_prod_img_detail_container {
         flex-direction: column !important;
     }
+    .footer-div-p {
+        font-size: 1.4em;
+    }
+    
+    .footer-p {
+        font-size: 1.4em;
+    }
+    
+    .footer-menu-ul li a{
+        font-size: 1.4em;
+    }
+    .icon-li {
+        font-size: 2em;
+    }
+
+    .cov-p-a {
+        font-size: 5em;
+    }
+    
 
 }
 
@@ -1102,6 +1176,10 @@ ul {
         font-size: 1.2em;
     }
     .icon-li {
-        font-size: 1.4em;
+        font-size: 1.6em;
+    }
+    
+    .cov-p-a {
+        font-size: 4em;
     }
 }
