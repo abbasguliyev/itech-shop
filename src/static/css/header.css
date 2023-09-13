@@ -318,4 +318,19 @@ header div {
     .nav-bar {
         top: 50px;
     }
+    .hamburger-search form input {
+        width: 25em;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    .hamburger-search form input {
+        width: 20em;
+    }
+}
+
+@media only screen and (max-width: 280px) {
+    .hamburger-search form input {
+        width: 15em;
+    }
 }
