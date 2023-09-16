@@ -18,7 +18,12 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
 from django.views.static import serve
+from django.contrib.sitemaps.views import sitemap
+from apps.products.sitemaps import ProductSitemap
 
+sitemaps = {
+		"products": ProductSitemap,
+}
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.pages.urls')),
@@ -27,4 +32,6 @@ urlpatterns = [
     path('cart/', include('apps.cart.urls')),
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
+
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 ]
