@@ -1,5 +1,6 @@
 from typing import Any, Dict
 import datetime
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
@@ -19,6 +20,16 @@ class IndexView(ListView):
     paginate_by = 3
     template_name = "home.html"
     context_object_name = "products"
+
+    def get_queryset(self) -> QuerySet[Any]:
+        return super().get_queryset().annotate(
+            discount_amount=Max(Case(
+                When(Q(discounts__discount_type=enums.DiscountType.FIXED) & Q(discounts__is_active=True), then=F('price') - F('discounts__amount')),
+                When(Q(discounts__discount_type=enums.DiscountType.PERCENTAGE) & Q(discounts__is_active=True), then=F('price') * F('discounts__amount') / 100),
+                output_field=DecimalField(max_digits=10, decimal_places=2),
+                ),
+            )
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
