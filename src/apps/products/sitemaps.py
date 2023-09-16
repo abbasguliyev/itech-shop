@@ -1,5 +1,5 @@
 from django.contrib.sitemaps import Sitemap
-from products.models import Product
+from apps.products.models import Product
 
 class ProductSitemap(Sitemap):
     changefreq = "weekly"
