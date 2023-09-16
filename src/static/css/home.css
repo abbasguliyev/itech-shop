@@ -1055,8 +1055,12 @@ ul {
     .cov-p-a {
         font-size: 5em;
     }
-    
+}
 
+@media only screen and (max-width: 632px) {
+    .cov-p-a {
+        font-size: 3em;
+    }
 }
 
 @media only screen and (max-width: 430px) {
@@ -1180,6 +1184,6 @@ ul {
     }
     
     .cov-p-a {
-        font-size: 4em;
+        font-size: 2em;
     }
 }

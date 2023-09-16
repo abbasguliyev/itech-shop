@@ -9,9 +9,10 @@
     justify-content: space-between;
     align-items: center;
     flex: 1;
-    min-height: 70vh;
+    min-height: 100vh;
     background-color: #fff;
     margin: 2em;
+    padding-bottom: 2em;
     border-radius: 10px;
 }
 
