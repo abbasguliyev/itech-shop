@@ -26,18 +26,25 @@
         <div class="section-title-container">
             <h3 class="section-title mb-4"><b>Məhsullar</b></h3>
         </div>
-        {% if products.count == 0 %}
+        {% if products is None %}
             <div class="not-found">
                 <p style="font-size: 2em;">Məhsul tapılmadı</p>
             </div>
         {% else %}
-        <div class="owl-carousel owl-theme" id="home-products">
-            {% for product in products %}
-                {% include 'product_cart.html' %}
-            {% endfor %} 
-        </div>
-        <a href="{% url 'products' %}" class="btn-more">Bütün məhsulları gör</a>
+            {% if products.count == 0 %}
+                <div class="not-found">
+                    <p style="font-size: 2em;">Məhsul tapılmadı</p>
+                </div>
+            {% else %}
+                <div class="owl-carousel owl-theme" id="home-products">
+                    {% for product in products %}
+                        {% include 'product_cart.html' %}
+                    {% endfor %} 
+                </div>
+                <a href="{% url 'products' %}" class="btn-more">Bütün məhsulları gör</a>
+            {% endif %}
         {% endif %}
+        
     </section>
     <section class="section-contain">
         <div class="section-title-container">

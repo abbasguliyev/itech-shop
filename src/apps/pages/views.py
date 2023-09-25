@@ -21,14 +21,17 @@ class IndexView(ListView):
     context_object_name = "products"
 
     def get_queryset(self) -> QuerySet[Any]:
-        return super().get_queryset().prefetch_related('products').filter(is_active=True).last().products.annotate(
+        home_prods = super().get_queryset().prefetch_related('products').filter(is_active=True).last()
+        if home_prods is not None:
+            home_prods.products.annotate(
             discount_amount=Max(Case(
-                When(Q(discounts__discount_type=enums.DiscountType.FIXED) & Q(discounts__is_active=True), then=F('price') - F('discounts__amount')),
-                When(Q(discounts__discount_type=enums.DiscountType.PERCENTAGE) & Q(discounts__is_active=True), then=F('price') * F('discounts__amount') / 100),
-                output_field=DecimalField(max_digits=10, decimal_places=2),
-                ),
+                    When(Q(discounts__discount_type=enums.DiscountType.FIXED) & Q(discounts__is_active=True), then=F('price') - F('discounts__amount')),
+                    When(Q(discounts__discount_type=enums.DiscountType.PERCENTAGE) & Q(discounts__is_active=True), then=F('price') * F('discounts__amount') / 100),
+                    output_field=DecimalField(max_digits=10, decimal_places=2),
+                    ),
+                )
             )
-        )
+        return home_prods    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
