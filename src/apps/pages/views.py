@@ -23,7 +23,7 @@ class IndexView(ListView):
     def get_queryset(self) -> QuerySet[Any]:
         home_prods = super().get_queryset().prefetch_related('products').filter(is_active=True).last()
         if home_prods is not None:
-            home_prods.products.annotate(
+            home_prods = home_prods.products.annotate(
             discount_amount=Max(Case(
                     When(Q(discounts__discount_type=enums.DiscountType.FIXED) & Q(discounts__is_active=True), then=F('price') - F('discounts__amount')),
                     When(Q(discounts__discount_type=enums.DiscountType.PERCENTAGE) & Q(discounts__is_active=True), then=F('price') * F('discounts__amount') / 100),

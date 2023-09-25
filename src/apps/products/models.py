@@ -106,6 +106,9 @@ class Collection(models.Model):
     def __str__(self) -> str:
         return self.title
     
+    class Meta:
+        verbose_name_plural = _("Təkliflər")
+    
 class Banner(models.Model):
     title = models.CharField(_("başlıq"), max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
@@ -129,3 +132,6 @@ class HomePageProducts(models.Model):
             self.is_active = True
 
         super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = _("Ana Səhifəyə düşəcək məhsullar")
