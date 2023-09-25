@@ -31,30 +31,12 @@
                 <p style="font-size: 2em;">Məhsul tapılmadı</p>
             </div>
         {% else %}
-            <div class="product-body" id="product_id">
-                <div class="home-product-slider">
-                    <div>
-                        {% if page_obj.has_previous %}
-                        <a hx-get="{% url 'index_products_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#product_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
-                        {% else %}
-                        <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
-                        {% endif %}
-                    </div>
-                    <div class="home-product-slider-prod-carts">
-                        {% for product in products %}
-                        {% include 'product_cart.html' %}
-                        {% endfor %} 
-                    </div>
-                    <div>
-                        {% if page_obj.has_next %}
-                        <a hx-get="{% url 'index_products_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#product_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
-                        {% else %}
-                        <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
-                        {% endif %}
-                    </div>
-                </div>
-                <a href="{% url 'products' %}" class="btn-more">Bütün məhsulları gör</a>
-            </div>
+        <div class="owl-carousel owl-theme" id="home-products">
+            {% for product in products %}
+                {% include 'product_cart.html' %}
+            {% endfor %} 
+        </div>
+        <a href="{% url 'products' %}" class="btn-more">Bütün məhsulları gör</a>
         {% endif %}
     </section>
     <section class="section-contain">

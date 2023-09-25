@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from apps.products.models import Product, Category, AttributeValues, Attributes, Banner, Collection, Discount, ProductAttribute
+from apps.products.models import Product, Category, AttributeValues, Attributes, Banner, Collection, Discount, ProductAttribute, HomePageProducts
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -50,7 +50,6 @@ class DiscountAdmin(admin.ModelAdmin):
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "product":
-            # İlgili özelliği seçmek için bir dropdown menü oluşturun
             kwargs["widget"] = admin.widgets.FilteredSelectMultiple(
                 db_field.verbose_name,
                 is_stacked=False,
@@ -67,7 +66,6 @@ class CollectionAdmin(admin.ModelAdmin):
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "products":
-            # İlgili özelliği seçmek için bir dropdown menü oluşturun
             kwargs["widget"] = admin.widgets.FilteredSelectMultiple(
                 db_field.verbose_name,
                 is_stacked=False,
@@ -78,10 +76,23 @@ class CollectionAdmin(admin.ModelAdmin):
 class ProductAttributeAdmin(admin.ModelAdmin):
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "attribute_values":
-            # İlgili özelliği seçmek için bir dropdown menü oluşturun
             kwargs["widget"] = admin.widgets.FilteredSelectMultiple(
                 db_field.verbose_name,
                 is_stacked=False,
             )
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
+@admin.register(HomePageProducts)
+class HomePageProductsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'is_active', 'created_at', 'updated_at')
+    list_display_links = ('id', 'title')
+    list_filter = ('is_active', 'title')
+    search_fields = ('title',)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "products":
+            kwargs["widget"] = admin.widgets.FilteredSelectMultiple(
+                db_field.verbose_name,
+                is_stacked=False,
+            )
+        return super().formfield_for_manytomany(db_field, request, **kwargs)

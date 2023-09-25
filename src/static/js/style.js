@@ -9,4 +9,4 @@ main = document.querySelector("#main-wrapper").addEventListener('click', closeHa
 function closeHamburger() {
     navBar = document.querySelector(".nav-bar")
     navBar.classList.remove("active")
-  }
+}

@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from django.db import models
 from django.utils.translation import gettext as _
 from ckeditor.fields import RichTextField
@@ -114,3 +115,17 @@ class Banner(models.Model):
     
     def __str__(self) -> str:
         return self.title
+    
+class HomePageProducts(models.Model):
+    title = models.CharField(max_length=255)
+    products = models.ManyToManyField(Product, related_name="home_page_products")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+
+    def save(self, *args, **kwargs) -> None:
+        if self.is_active == True:
+            HomePageProducts.objects.prefetch_related('products').filter(is_active=True).update(is_active=False)
+            self.is_active = True
+
+        super().save(*args, **kwargs)

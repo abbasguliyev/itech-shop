@@ -12,17 +12,16 @@ from django.db.models import OuterRef, Subquery, Max, Min, When, Case, Value, F,
 from apps.pages.models import Contact, Company, Partners
 from apps.services.models import Services
 from apps.pages.forms import ContactForm
-from apps.products.models import Product, Category, Banner, Collection
+from apps.products.models import Product, Category, Banner, Collection, HomePageProducts
 from apps.products import filters, enums
 
 class IndexView(ListView):
-    model = Product
-    paginate_by = 3
+    model = HomePageProducts
     template_name = "home.html"
     context_object_name = "products"
 
     def get_queryset(self) -> QuerySet[Any]:
-        return super().get_queryset().annotate(
+        return super().get_queryset().prefetch_related('products').filter(is_active=True).last().products.annotate(
             discount_amount=Max(Case(
                 When(Q(discounts__discount_type=enums.DiscountType.FIXED) & Q(discounts__is_active=True), then=F('price') - F('discounts__amount')),
                 When(Q(discounts__discount_type=enums.DiscountType.PERCENTAGE) & Q(discounts__is_active=True), then=F('price') * F('discounts__amount') / 100),
