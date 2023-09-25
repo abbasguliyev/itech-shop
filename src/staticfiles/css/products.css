@@ -270,6 +270,8 @@
         height: auto !important;
         padding: 15px !important;
         border-top: none !important;
+        z-index: 99;
+
     }
 }
 

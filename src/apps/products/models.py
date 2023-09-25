@@ -23,7 +23,9 @@ class Category(models.Model):
             super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return self.name
+        if self.parent is not None:
+            return f"{self.parent.name}/{self.name}/"
+        return f"{self.name}/"
 
 class Attributes(models.Model):
     title = models.CharField(_("başlıq"), max_length=255)

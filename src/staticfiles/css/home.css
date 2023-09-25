@@ -659,8 +659,11 @@ ul {
 }
 
 .home-product-slider-prod-carts {
-    overflow: auto;
-    height: 60em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -765,6 +768,10 @@ ul {
     .offer-body {
         padding: 1.4em;
         width: 100%;
+    }
+
+    .index-collection-img {
+        height: 41em !important;
     }
 }
 

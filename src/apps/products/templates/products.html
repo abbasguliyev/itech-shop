@@ -1,5 +1,7 @@
 {% extends 'partials/_base.html' %}
 {% load static %}
+{% block title %}Məhsullar{% endblock title %}
+
 {% block content %}
 <div class="div-first-a">
     <div class="cover-a">
@@ -12,41 +14,20 @@
     </div>
 </div>
 <div class="products-container">
-    {% if current_category is not None %}
-    <div class="products-category">
-        <a href="{% url 'products' %}?category={{current_category.pk}}" class="products-current-category">
-            <b>Kateqoriya: </b>{{ current_category.name }}
-        </a>
-        {% if current_category.parent is not None %}
-        <a href="{% url 'products' %}?category={{current_category.parent.pk}}" class="products-current-category">
-            <b>Üst kateqoriya: </b>{{ current_category.parent.name }}
-        </a>
-        {% endif %}
-        <div class="row products-category-subcategories-container">
-            {% for ct in current_category.children.all %}
-            <a href="{% url 'products' %}?category={{ct.pk}}" class="col-sm-2 products-category-subcategory">
-                <b style="margin-right: 5px;">Alt kateqoriya:</b>
-                {% if ct.icon.url is not None %}
-                <img src="{{ ct.icon.url }}" alt="ct.name">
+    <div class="products-category-nav">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item" aria-current="page"><a href="{% url "home" %}">Ana Səhifə</a></li>
+              {% if current_category.parent is not None %}
+                {% if current_category.parent.parent is not None %}
+                    <li class="breadcrumb-item" aria-current="page"><a href="{% url 'products' %}?category={{current_category.parent.parent.pk}}">{{ current_category.parent.parent.name }}</a></li>
                 {% endif %}
-                <p>{{ ct.name }}</p>
-            </a>
-            {% endfor %}
-        </div>
+                <li class="breadcrumb-item" aria-current="page"><a href="{% url 'products' %}?category={{current_category.parent.pk}}">{{ current_category.parent.name }}</a></li>
+              {% endif %}
+              <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'products' %}?category={{current_category.pk}}">{{ current_category.name }}</a></li>
+            </ol>
+        </nav>
     </div>
-    {% else %}
-    <div class="row products-category-subcategories-container">
-        {% for category in categories %}
-        <a href="{% url 'products' %}?category={{category.pk}}" class="col-sm-2 products-category-subcategory">
-            <b style="margin-right: 5px;">Kateqoriya:</b>
-            {% if category.icon.url is not None %}
-            <img src="{{ category.icon.url }}" alt="category.name">
-            {% endif %}
-            <p>{{ category.name }}</p>
-        </a>
-        {% endfor %}
-    </div>
-    {% endif %}
     <div class="products-datas">
         <div class="products-filter">
             <form action="{% url 'products' %}" method="GET" class="select-form">
