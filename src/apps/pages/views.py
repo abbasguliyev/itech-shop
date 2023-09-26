@@ -35,7 +35,7 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        services = Services.objects.all()[:3]
+        services = Services.objects.all()
         company = Company.objects.all().last()
         categories = Category.objects.select_related('parent').filter(parent=None).all()
         partners = Partners.objects.all()[:3]

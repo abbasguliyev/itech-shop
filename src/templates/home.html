@@ -20,7 +20,7 @@
               <i class="fas fa-search"></i>
           </button>
         </form>
-      </section>
+    </section>
     {% include 'partials/_section_header.html' %}
     <section class="section-contain">
         <div class="section-title-container">
@@ -36,7 +36,7 @@
                     <p style="font-size: 2em;">Məhsul tapılmadı</p>
                 </div>
             {% else %}
-                <div class="owl-carousel owl-theme" id="home-products">
+                <div class="owl-carousel owl-theme" id="home-products" style="margin-left: 10px; margin-right: 10px;">
                     {% for product in products %}
                         {% include 'product_cart.html' %}
                     {% endfor %} 
@@ -44,7 +44,6 @@
                 <a href="{% url 'products' %}" class="btn-more">Bütün məhsulları gör</a>
             {% endif %}
         {% endif %}
-        
     </section>
     <section class="section-contain">
         <div class="section-title-container">
@@ -55,61 +54,33 @@
                 <p style="font-size: 2em;">Servis tapılmadı</p>
             </div>
         {% else %}
-            <div class="service-body" id="service_id">
-                <div class="home-product-slider">
-                    <div>
-                        {% if page_obj.has_previous %}
-                        <a hx-get="{% url 'index_services_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#service_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
-                        {% else %}
-                        <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
-                        {% endif %}
-                    </div>
-                    <div class="home-service-slider">
-                        {% for service in services %}
-                        <div class="serv_container">
-                            <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-img"/>
-                            <div class="serv_detail">
-                                <div>
-                                    <h4>{{ service.name }}</h4>
-                                </div>
+            <div class="owl-carousel owl-theme" id="home-services" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
+                {% for service in services %}
+                    <div class="serv_container">
+                        <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-img"/>
+                        <div class="serv_detail">
+                            <div>
+                                <h4>{{ service.name }}</h4>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
-                    <div>
-                        {% if page_obj.has_next %}
-                        <a hx-get="{% url 'index_services_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#service_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
-                        {% else %}
-                        <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
-                        {% endif %}
-                    </div>
-                </div>
-                <a href="{% url 'services' %}" class="btn-more">Bütün xidmətləri gör</a>
+                {% endfor %}
             </div>
+            <a href="{% url 'services' %}" class="btn-more">Bütün xidmətləri gör</a>
         {% endif %}
     </section>
     <section class="section-contain">
         <div class="section-title-container">
             <h3 class="section-title mb-4"><b>Partnyorlar</b></h3>
         </div>
-        <div class="partners-body" id="partners_id">
-            {% if page_obj.has_previous %}
-            <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.previous_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
-            {% else %}
-            <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-left"></i></a>
-            {% endif %}
-            <div class="pattern-slide-container">
+        <div class="partners-body">
+            <div class="owl-carousel owl-theme" id="home-partners" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
                 {% for partner in partners %}
                 <div class="partners-slide">
                     <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
                 </div>
                 {% endfor %}
             </div>
-            {% if page_obj.has_next %}
-            <a hx-get="{% url 'index_partners_pagination_view' %}?page={{ page_obj.next_page_number }}" hx-target="#partners_id" hx-trigger="click" class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
-            {% else %}
-            <a class="" style="cursor: pointer; font-size: 2em; margin-left: 1em; margin-right: 1em;"><i class="fa-solid fa-chevron-right"></i></a>
-            {% endif %}
         </div>
     </section>
 </div>

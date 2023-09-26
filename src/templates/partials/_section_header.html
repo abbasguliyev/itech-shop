@@ -1,6 +1,6 @@
 {% load static %}
 <section class="header-container">
-    <div class="category">
+    <section class="category">
         <ul class="main-ul">
             {% for category in categories %}
             <li class="category-dropdown">
@@ -56,30 +56,20 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
-    <section class="post-carousel">
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                {% if banners.count != 0 %}
-                    {% for banner in banners %}
-                    <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %} index-carousel" id="{{banner.pk}}">
-                        <img src="{{banner.image.url}}" class="d-block w-100 index-carousel-img " alt="{{banner.title}}">
+    </section>
+    <section class="carousel-wrapper">
+        <div class="owl-carousel owl-theme" id="home-banner">
+            {% if banners.count != 0 %}
+                {% for banner in banners %}
+                    <div class="item">
+                        <img src="{{banner.image.url}}" alt="{{banner.title}}">
                     </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="carousel-item active index-carousel">
-                        <img src="{% static 'images/default2.jpg' %}" class="d-block w-100 index-carousel-img " alt="default">
-                    </div>
-                {% endif %}
+                {% endfor %}
+            {% else %}
+            <div class="item">
+                <img src="{% static 'images/default2.jpg' %}" alt="default">
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            {% endif %}
         </div>
     </section>
     <section class="offer">
@@ -95,45 +85,41 @@
             <div id="demo"></div>
         </div>
         <div class="offer-body">
-            <div id="carouselBannerFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    {% if collection_prods|length != 0 %}
-                        {% for product in collection_prods %}
-                        <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %} index-carousel" id="{{product.pk}}">
-                            <div class="offer_product_wrapper" id="{{product.pk}}">
-                                <div onclick="location.href='{% url 'product_detail' product.slug %}';" class="home_prod_container">
-                                    <span class="free_delivery_text">Pulsuz çatdırılma</span>
-                                    <div class="home_prod_img_detail_container">
-                                        <img src="{{product.image.url}}" alt="{{ product.name }}" class="home-product-img" />
-                                        <div class="home_prod_detail">
-                                            <div>
-                                                <h4>
-                                                    {{ product.name }}
-                                                </h4>
-                                                {% if product.discount_amount is None %}
-                                                <b><p>{{ product.price }} AZN</p></b>
-                                                {% else %}
-                                                <del><p>{{ product.price }} AZN</p></del>
-                                                <b><p>{{ product.discount_amount|floatformat:2  }} AZN</p></b>
-                                                {% endif %}
-                                            </div>
+            <div class="owl-carousel owl-theme" id="home-offer">
+                {% if collection_prods|length != 0 %}
+                    {% for product in collection_prods %}
+                        <div class="offer_product_wrapper" id="{{product.pk}}">
+                            <div onclick="location.href='{% url 'product_detail' product.slug %}';" class="home_prod_container">
+                                <span class="free_delivery_text">Pulsuz çatdırılma</span>
+                                <div class="home_prod_img_detail_container">
+                                    <img src="{{product.image.url}}" alt="{{ product.name }}" class="home-product-img" />
+                                    <div class="home_prod_detail">
+                                        <div>
+                                            <h4>
+                                                {{ product.name }}
+                                            </h4>
+                                            {% if product.discount_amount is None %}
+                                            <b><p>{{ product.price }} AZN</p></b>
+                                            {% else %}
+                                            <del><p>{{ product.price }} AZN</p></del>
+                                            <b><p>{{ product.discount_amount|floatformat:2  }} AZN</p></b>
+                                            {% endif %}
                                         </div>
                                     </div>
-                                    <form method="POST" action="{% url 'add_to_cart' %}" class="home-prod-cart-btn">
-                                        {% csrf_token %}
-                                        <input type="hidden" value={{product.pk}} name="product">
-                                        <button type="submit">Səbətə at</button>
-                                    </form>
                                 </div>
+                                <form method="POST" action="{% url 'add_to_cart' %}" class="home-prod-cart-btn">
+                                    {% csrf_token %}
+                                    <input type="hidden" value={{product.pk}} name="product">
+                                    <button type="submit">Səbətə at</button>
+                                </form>
                             </div>
                         </div>
-                        {% endfor %}
-                    {% else %}
-                    <div class="carousel-item active index-carousel">
-                        <img src="{% static 'images/default2.jpg' %}" class="d-block w-100 index-collection-img " alt="default">
-                    </div>
-                    {% endif %}
+                    {% endfor %}
+                {% else %}
+                <div class="carousel-item active index-carousel">
+                    <img src="{% static 'images/default2.jpg' %}" class="d-block w-100 index-collection-img " alt="default">
                 </div>
+                {% endif %}
             </div>
         </div>
     </section>
