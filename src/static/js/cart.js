@@ -38,19 +38,25 @@ $(document).ready(function() {
         var href = $("#submit-order-btn-id").attr('href')
         var products = $(".product-name-class").toArray()
         var counts = $(".cart-prod-count").toArray()
+        var slugs = $(".product-slug-class").toArray()
         var totalPrice = $("#total-price-id").text();
         products_arr = []
         for(var i=0; i<products.length; i++) {
             prod_obj = {}
+            prod_obj.slug = slugs[i].innerText
             prod_obj.product = products[i].text
             prod_obj.count = counts[i].value
             products_arr.push(prod_obj)
+            console.log(slugs[i].innerText)
         }
         href+=`&text=Salam. Aşağıdakı məhsulları almaq istəyirəm. `
+        prod_url = ''
         for(var i=0; i<products_arr.length; i++) {
-            href+=`${i+1}. ${products_arr[i].product} - ${products_arr[i].count} ədəd, `
+            href+=`\n${i+1}. ${products_arr[i].product} - ${products_arr[i].count} ədəd, \n`
+            prod_url += `\nhttps://itechshop.az/products/${products_arr[i].slug}/\n`
         }
-        href+=` Ümumi məbləğ: ${totalPrice} AZN.`
+        href+=`Ümumi məbləğ: ${totalPrice} AZN.`
+        href+=prod_url
         console.log(href)
         window.location.href = href;
     });

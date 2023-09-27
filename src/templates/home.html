@@ -98,12 +98,35 @@ var x = setInterval(function() {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    // document.getElementById("demo").innerHTML = days + "g " + hours + "s " + minutes + "d " + seconds + "s ";
+    document.getElementById("demo").innerHTML = `
+        <div class="dealTimer_wrapper">
+            <div class="dealTimer">
+                <span class="dealTimer_body">${days}</span>
+                <span class="dealTimer_title">gün</span>
+            </div>
+            <div class="dealTimer__vert"></div>
+            <div class="dealTimer">
+                <span class="dealTimer_body">${hours}</span>
+                <span class="dealTimer_title">saat</span>
+            </div>
+            <div class="dealTimer__vert"></div>
+            <div class="dealTimer">
+                <span class="dealTimer_body">${minutes}</span>
+                <span class="dealTimer_title">dəqiqə</span>
+            </div>
+            <div class="dealTimer__vert"></div>
+            <div class="dealTimer">
+                <span class="dealTimer_body">${seconds}</span>
+                <span class="dealTimer_title">saniyə</span>
+            </div>
+        </div>
+    `
 
     if (distance < 0) {
         clearInterval(x);
         document.getElementById("demo").innerHTML = "EXPIRED";
-        }
-    }, 1000);
+    }
+}, 1000);
 </script>
 {% endblock custom_js %}

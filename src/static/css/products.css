@@ -298,6 +298,11 @@
     }
 }
 
+.company_prod_info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .free_delivery_text {
     border: 1px solid #2cad4b;
     width: 10em;
@@ -310,6 +315,20 @@
     margin-left: 0.9em;
     margin-bottom: 0.9em;
     color: #2cad4b;
+}
+
+.offical_guarantee_text {
+    border: 1px solid #FF3363;
+    width: 10em;
+    font-size: 1.2em;
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    margin-top: 0.9em;
+    margin-left: 0.9em;
+    margin-bottom: 0.9em;
+    color: #FF3363;
 }
 
 .prod_detail {
@@ -340,10 +359,19 @@
 }
 
 .prod-cart-btn button:hover {
-    border: 1px solid #012849;
-    background-color: #fff;
-    color: #012849;
+    border: none;
+    background-color: #012849;
+    color: #fff;
+    opacity: 0.8;
     transition: all ease 0.5s;
+}
+
+.prod_discoun_amount {
+    margin-top: 0;
+}
+
+.prod_del_amount {
+    margin-bottom: 0;
 }
 
 .prod_detail div {
@@ -448,6 +476,13 @@
 
 .product-detail-price del h3 {
     font-weight: 400;
+    color: #012849;
+    font-size: 1.6em;
+}
+
+.product-detail-price h3 {
+    color: #FF3363;
+    font-size: 2em;
 }
 
 .product_detail_category {

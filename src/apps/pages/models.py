@@ -22,6 +22,7 @@ class Company(models.Model):
     facebook_url = models.URLField(max_length = 500)
     tiktok_url = models.URLField(max_length = 500)
     instagram_url = models.URLField(max_length = 500)
+    about = RichTextField(_("haqqımızda"), null=True, blank=True)
 
     class Meta:
         verbose_name_plural = _("Şirkət məlumatları")

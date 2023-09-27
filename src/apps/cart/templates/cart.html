@@ -23,6 +23,7 @@
     {% for product in products %}
         <li>
           <div class="cart-prod-name">
+            <div class="product-slug-class" style="display: none">{{product.slug}}</div>
             <img src={{product.image.url}} alt="{{product.name}}">
             <a class="product-name-class" href="{% url 'product_detail' product.slug %}">{{product.name}}</a>
           </div>

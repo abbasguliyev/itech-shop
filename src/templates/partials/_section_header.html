@@ -10,7 +10,6 @@
                     {% endif %}
                     <p>{{ category.name }}</p>
                 </a>
-                <hr>
                 {% if category.children.all.count != 0 %}
                 <div class="category-children">
                     <ul class="row">
@@ -74,23 +73,28 @@
     </section>
     <section class="offer">
         <div class="offer-head">
-            {% if collection.title is not None %}
-            <p>{{collection.title}}</p>
-            {% else %}
-            <p>Həftənin Təklifi</p>
-            {% endif %}
-            {% if collection.end_date != None %}
-            <input type="datetime" id="coll_end_date" style="display: none;" value="{{collection.end_date|date:"M d, Y H:i:s"}}"/>
-            {% endif %}
-            <div id="demo"></div>
+            <div class="offer-title-wrapper">
+                {% if collection.title is not None %}
+                <p>{{collection.title}}</p>
+                {% else %}
+                <p>Həftənin Təklifi</p>
+                {% endif %}
+                {% if collection.end_date != None %}
+                <input type="datetime" id="coll_end_date" style="display: none;" value="{{collection.end_date|date:"M d, Y H:i:s"}}"/>
+                {% endif %}
+                <div id="demo"></div>
+            </div>
         </div>
         <div class="offer-body">
             <div class="owl-carousel owl-theme" id="home-offer">
                 {% if collection_prods|length != 0 %}
                     {% for product in collection_prods %}
                         <div class="offer_product_wrapper" id="{{product.pk}}">
-                            <div onclick="location.href='{% url 'product_detail' product.slug %}';" class="home_prod_container">
-                                <span class="free_delivery_text">Pulsuz çatdırılma</span>
+                            <div onclick="location.href='{% url 'product_detail' product.slug %}';">
+                                <div class="company_prod_info">
+                                    <span class="free_delivery_text">Pulsuz çatdırılma</span>
+                                    <span class="offical_guarantee_text">Rəsmi zəmanət</span>
+                                </div>
                                 <div class="home_prod_img_detail_container">
                                     <img src="{{product.image.url}}" alt="{{ product.name }}" class="home-product-img" />
                                     <div class="home_prod_detail">
@@ -99,20 +103,20 @@
                                                 {{ product.name }}
                                             </h4>
                                             {% if product.discount_amount is None %}
-                                            <b><p>{{ product.price }} AZN</p></b>
+                                            <p class="prod_price"><b>{{ product.price }} AZN</b></p>
                                             {% else %}
-                                            <del><p>{{ product.price }} AZN</p></del>
-                                            <b><p>{{ product.discount_amount|floatformat:2  }} AZN</p></b>
+                                            <p class="prod_del_amount"><del>{{ product.price }} AZN</del></p>
+                                            <p class="prod_discoun_amount"><b>{{ product.discount_amount |floatformat:2  }} AZN</b></p>
                                             {% endif %}
                                         </div>
                                     </div>
                                 </div>
-                                <form method="POST" action="{% url 'add_to_cart' %}" class="home-prod-cart-btn">
-                                    {% csrf_token %}
-                                    <input type="hidden" value={{product.pk}} name="product">
-                                    <button type="submit">Səbətə at</button>
-                                </form>
                             </div>
+                            <form method="POST" action="{% url 'add_to_cart' %}" class="home-prod-cart-btn">
+                                {% csrf_token %}
+                                <input type="hidden" value={{product.pk}} name="product">
+                                <button type="submit">Səbətə at</button>
+                            </form>
                         </div>
                     {% endfor %}
                 {% else %}

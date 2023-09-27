@@ -21,10 +21,10 @@
                 </div>
             </div>
         </div>
-        <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn">
+        <form class="prod-cart-btn">
             {% csrf_token %}
             <input type="hidden" value={{product.pk}} name="product">
-            <button type="submit">Səbətə at</button>
+            <button hx-post="{% url 'add_to_cart' %}" hx-target="#{{product.pk}}">Səbətə at</button>
         </form>
     </div>
     <div class="prod-attr">

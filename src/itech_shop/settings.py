@@ -180,6 +180,8 @@ CKEDITOR_CONFIGS = {
    },
 }
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+
 # production 
 
 if DEBUG == False:
