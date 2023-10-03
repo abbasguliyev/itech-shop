@@ -1,8 +1,11 @@
 from django.contrib import admin
 from apps.pages.models import Contact, Company, Partners
+from django.contrib.auth.models import Permission
 
 admin.site.site_header = 'ITECH SHOP Admin'
 admin.site.site_title = 'adminsitration of ITech Shop'
+
+admin.site.register(Permission)
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):

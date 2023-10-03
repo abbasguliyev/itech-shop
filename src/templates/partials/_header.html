@@ -10,7 +10,7 @@
     </div>
     <section class="search">
       <form action="{% url 'products' %}" method="GET" class="select-form">
-        <input type="text" name="name" placeholder="Axtarış...">
+        <input type="text" name="name" placeholder="Axtarış..." value={% if search_name is not None %}{{search_name}}{% endif %}>
         <button type="submit">
             <i class="fas fa-search"></i>
         </button>
@@ -33,7 +33,7 @@
         <li>
           <a class="{% if 'contact' in request.path %}active{% endif %}" href="{% url 'contact' %}">Əlaqə</a>
         </li>
-        <li class="cart-icon">
+        <li class="cart-icon" id="cart-icon-id">
           <a class="{% if 'cart' in request.path %}active{% endif %}" href="{% url 'cart' %}">
             <i class="fa-solid fa-cart-shopping"></i>{% if request.session.cart|length > 0 %}<span>{{request.session.cart | length}}</span>{% endif %}
           </a>

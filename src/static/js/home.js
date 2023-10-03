@@ -9,7 +9,7 @@ $(document).ready(function() {
         autoPlay : true,
         goToFirst : true,
         goToFirstSpeed : 1000,
-        items : 5,
+        items : 4,
 
         // Navigation
         navigation : false,
@@ -45,7 +45,7 @@ $(document).ready(function() {
         autoPlay : true,
         goToFirst : true,
         goToFirstSpeed : 1000,
-        items : 5,
+        items : 4,
 
         // Navigation
         navigation : false,

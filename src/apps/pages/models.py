@@ -12,6 +12,14 @@ class Contact(models.Model):
 
     class Meta:
         verbose_name_plural = _("Kontakt mesajları")
+        ordering = ('pk',)
+        default_permissions = []
+        permissions = (
+            ("view_contact", "Mövcud kotakt mesajlarına baxa bilər"),
+            ("add_contact", "Kontakt mesajı əlavə edə bilər"),
+            ("change_contact", "Kontakt mesajını yeniləyə bilər"),
+            ("delete_contact", "Kontakt mesajını silə bilər")
+        )
 
 
     def __str__(self) -> str:
@@ -26,6 +34,15 @@ class Company(models.Model):
 
     class Meta:
         verbose_name_plural = _("Şirkət məlumatları")
+        ordering = ('pk',)
+        default_permissions = []
+        permissions = (
+            ("view_company", "Mövcud şirkət məlumatlarına baxa bilər"),
+            ("add_company", "Şirkət məlumatları əlavə edə bilər"),
+            ("change_company", "Şirkət məlumatlarını yeniləyə bilər"),
+            ("delete_company", "Şirkət məlumatlarını silə bilər")
+        )
+
 
 class Partners(models.Model):
     name = models.CharField(_("adı"), max_length=255)
@@ -33,6 +50,14 @@ class Partners(models.Model):
 
     class Meta:
         verbose_name_plural = _("Partnyorlar")
+        ordering = ('pk',)
+        default_permissions = []
+        permissions = (
+            ("view_partners", "Mövcud partnyorlara baxa bilər"),
+            ("add_partners", "Partnyor əlavə edə bilər"),
+            ("change_partners", "Partnyorları yeniləyə bilər"),
+            ("delete_partners", "Partnyorları silə bilər")
+        )
 
     def save(self, *args, **kwargs):
         if self.logo != None:

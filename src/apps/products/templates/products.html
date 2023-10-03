@@ -1,5 +1,6 @@
 {% extends 'partials/_base.html' %}
 {% load static %}
+{% load split %}
 {% block title %}Məhsullar{% endblock title %}
 
 {% block content %}
@@ -40,7 +41,15 @@
                         <div style="display:none;">
                             {{filter.form.category}}
                         </div>
-                        {{filter.form.attribute_values}}
+                        {% for attribute_title in attribute_titles %}
+                            <p>{{attribute_title}}</p>
+                            {% for attribute_value in attribute_values %}
+                                {% if attribute_value.attribute == attribute_title %}
+                                    <input type="checkbox" name="attribute_values" id="{{attribute_value.pk}}" value="{{attribute_value.pk}}" {% if attribute_value.pk in selected_attribute_values %}checked{% endif %}>
+                                    {{attribute_value.value}} <br>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
                     </div>
                 </fieldset>
                 <button type="submit">Axtar</button>

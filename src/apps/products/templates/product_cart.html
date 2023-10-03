@@ -6,7 +6,7 @@
                 <span class="free_delivery_text">Pulsuz çatdırılma</span>
                 <span class="offical_guarantee_text">Rəsmi zəmanət</span>
             </div>
-            <img src="{{product.image.url}}" alt="{{ product.name }}" class="product-img" />
+            <img src="{{product.images.first.image.url}}" alt="{{ product.name }}" class="product-img" />
             <div class="prod_detail">
                 <div>
                     <h4>
@@ -21,10 +21,10 @@
                 </div>
             </div>
         </div>
-        <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn">
+        <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn" hx-post="{% url "add_to_cart" %}" hx-trigger="submit" hx-target="#cart-icon-id">
             {% csrf_token %}
             <input type="hidden" value={{product.pk}} name="product">
-            <button type="submit">Səbətə at</button>
+            <button id="add_to_cart_btn_id" type="submit">Səbətə at</button>
         </form>
     </div>
     <div class="prod-attr">

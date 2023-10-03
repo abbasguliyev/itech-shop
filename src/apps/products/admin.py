@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from apps.products.models import Product, Category, AttributeValues, Attributes, Banner, Collection, Discount, ProductAttribute, HomePageProducts
+from apps.products.models import Product, ProductColor, ProductImage, Category, AttributeValues, Attributes, Banner, Collection, Discount, ProductAttribute, HomePageProducts
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -10,6 +10,17 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('name',)
     search_fields = ('name', 'price')
     prepopulated_fields = {"slug": ['name']}
+
+@admin.register(ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'product')
+    list_filter = ('product',)
+
+
+@admin.register(ProductColor)
+class ProductColorAdmin(admin.ModelAdmin):
+    list_display = ('id', 'product', 'color_code')
+    list_filter = ('product', 'color_code')
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):

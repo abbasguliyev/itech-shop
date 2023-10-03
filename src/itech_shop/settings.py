@@ -135,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-en'
+LANGUAGE_CODE = 'az-az'
 
 TIME_ZONE = 'UTC'
 
@@ -181,7 +181,7 @@ CKEDITOR_CONFIGS = {
 }
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 # production 
 
 if DEBUG == False:

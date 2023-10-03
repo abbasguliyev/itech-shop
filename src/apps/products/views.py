@@ -11,15 +11,16 @@ from django.forms.models import model_to_dict
 
 from apps.pages.models import Company
 
-from apps.products.models import Product, Category, Discount, AttributeValues
+from apps.products.models import Product, Category, Discount, AttributeValues, Attributes, ProductColor
 from apps.products import filters, enums
 
 
 class ProductView(ListView):
     model = Product
-    paginate_by = 10
+    paginate_by = 5
     template_name = "products.html"
     context_object_name = "products"
+    form_class = filters.ProductFilter
 
     def get_queryset(self) -> QuerySet[Any]:
         queryset = super().get_queryset().annotate(
@@ -56,6 +57,9 @@ class ProductView(ListView):
             context['current_category'] = None
 
         context['attribute_values'] = AttributeValues.objects.select_related('attribute').all()
+        context['selected_attribute_values'] = [int(selected_attribute_value) for selected_attribute_value in self.request.GET.getlist('attribute_values')]
+        context['search_name'] = self.request.GET.get('name')
+        context['attribute_titles'] = Attributes.objects.all()
         
         return context
     
@@ -78,4 +82,5 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['company'] = Company.objects.all().last()
+        context['colors'] = ProductColor.objects.select_related('product').filter(product=self.get_object()).all()
         return context

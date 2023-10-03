@@ -9,6 +9,14 @@ class Services(models.Model):
 
     class Meta:
         verbose_name_plural = _("Servislər")
+        ordering = ("pk",)
+        default_permissions = []
+        permissions = (
+            ("view_services", "Mövcud servislərə baxa bilər"),
+            ("add_services", "Servis əlavə edə bilər"),
+            ("change_services", "Servisləri yeniləyə bilər"),
+            ("delete_services", "Servisləri silə bilər")
+        )
 
     def save(self, *args, **kwargs):
         if self.image != None:

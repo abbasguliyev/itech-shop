@@ -25,7 +25,7 @@ def add_to_cart(request):
             prod_list.add(product.pk)
 
         request.session["cart"] = list(prod_list)
-    return redirect("home")
+    return render(request, "htmx_cart.html")
 
 class CartListView(TemplateView):
     template_name = "cart.html"

@@ -1,0 +1,7 @@
+{% load static %}
+
+<li class="cart-icon" id="cart-icon-id">
+    <a href="{% url 'cart' %}">
+      <i class="fa-solid fa-cart-shopping"></i>{% if request.session.cart|length > 0 %}<span>{{request.session.cart | length}}</span>{% endif %}
+    </a>
+</li>

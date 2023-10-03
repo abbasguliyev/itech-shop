@@ -13,6 +13,9 @@ class ProductFilter(django_filters.FilterSet):
     attribute_values = django_filters.ModelMultipleChoiceFilter(queryset = AttributeValues.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False, method='filter_attribute_values')
 
     def filter_attribute_values(self, queryset, name, value):
+        print(f"*******************************************{self.request=}")
+        print(f"*******************************************{value=}")
+        print(f"*******************************************{name=}")
         if value:
             queryset = queryset.filter(attributes__attribute_values__in=value)
         else:

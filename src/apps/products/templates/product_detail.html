@@ -15,15 +15,29 @@
 </div>
 <div class="products-detail-body">
     <div class="product_container">
-        <div class="prod-detail-img">
-            <img src="{{product.image.url}}" alt="product.name">
+        <div class="prod-image-wrapper">
+            <div class="prod-detail-img">
+                <img class="main-prod-image" id="main-prod-image-id" src="{{product.images.first.image.url}}" alt="{{product.name}}">
+            </div>
+            <div class="product_images_slider">
+                {% for image in product.images.all %}
+                    <img class="slider-prod-image" src="{{image.image.url}}" alt="{{forloop.counter}}">
+                {% endfor %}
+            </div>
         </div>
         <div class="product_detail">
             <div class="product_detail_info">
                 <div class="product_detail_info_head">
-                    <h3>
-                        {{product.name}}
-                    </h3>
+                    <div class="product-name-wrapper">
+                        <h3>
+                            {{product.name}}
+                        </h3>
+                        <div class="product-color-wrapper">
+                            {% for color in colors %}
+                            <div class="product-color" style="background-color: {{color.color_code}};"></div>
+                            {% endfor %}
+                        </div>
+                    </div>
                     <div class="product-detail-price">
                         {% if product.discount_amount is None %}
                         <h3>
@@ -39,8 +53,12 @@
                 </div>
                 <hr>
                 <div class="product_detail_category">
-                    <p>Kateqoriyası:</p>  
+                    <p>Kateqoriyası:</p>
+                    {% if product.category == None %}
+                    <span>Yoxdur</span>
+                    {% else %}
                     <span>{{product.category}}</span>
+                    {% endif %}
                 </div>
                 <div class="product_detail_info_body">
                     {{product.description | safe}}
