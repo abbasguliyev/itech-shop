@@ -516,12 +516,19 @@ ul {
 }
 
 .carousel-wrapper {
-    width: 50% !important;
+    width: 90em !important;
     margin-right: 2em;
     height: auto !important;
 }
 
-#home-banner .item img {
+#home-banner {
+    display: block;
+    width: 90em;
+    height: 63em;
+    border-radius: 10px;
+}
+
+.item img {
     display: block;
     width: 100%;
     height: 63em;
@@ -802,26 +809,38 @@ ul {
     transition: all ease 0.5s;
 }
 
-@media only screen and (max-width: 1140px) {
-    .offer {
-        width: 40em;
+@media only screen and (max-width: 1646px) {
+    .carousel-wrapper {
+        width: 80em !important;
     }
-
-    .offer-head p {
-        font-size: 1.4em;
-    }
-
-    .offer-body {
-        padding: 1.4em;
-        width: 100%;
-    }
-
-    .index-collection-img {
-        height: 41em !important;
+    
+    #home-banner {
+        width: 80em;
     }
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1544px) {
+    .carousel-wrapper {
+        width: 70em !important;
+    }
+    
+    #home-banner {
+        width: 70em;
+    }
+}
+
+@media only screen and (max-width: 1502px) {
+    .carousel-wrapper {
+        width: 70em !important;
+    }
+    
+    #home-banner {
+        width: 70em;
+    }
+}
+
+
+@media only screen and (max-width: 1401px) {
     .category {
         position: static;
     }
@@ -843,11 +862,18 @@ ul {
     }
 
     .carousel-wrapper {
-        order: 1;
         width: 100% !important;
-        align-self: center;
-        object-fit: cover;
-        margin-bottom: 20px;
+        height: auto !important;
+    }
+    
+    #home-banner {
+        width: 100%;
+        height: 50em;
+    }
+    
+    .item img {
+        width: 100%;
+        height: 50em;
     }
 
     .category {
@@ -976,6 +1002,27 @@ ul {
         color: #012849;
     }
 }
+
+
+@media only screen and (max-width: 1140px) {
+    .offer {
+        width: 100%;
+    }
+
+    .offer-head p {
+        font-size: 1.4em;
+    }
+
+    .offer-body {
+        padding: 1.4em;
+        width: 100%;
+    }
+
+    .index-collection-img {
+        height: 41em !important;
+    }
+}
+
 @media only screen and (max-width: 1030px) {
     .footer-div {
         display: flex;
@@ -1078,6 +1125,18 @@ ul {
 }
 
 @media only screen and (max-width: 700px) {
+    .carousel-wrapper {
+        height: auto !important;
+    }
+    
+    #home-banner {
+        height: 30em;
+    }
+    
+    .item img {
+        height: 30em;
+    }
+
     .offer {
         height: auto;
     }

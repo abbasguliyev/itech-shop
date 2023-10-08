@@ -90,6 +90,7 @@
 <script>
 var countDownDateStr = document.getElementById("coll_end_date").value
 var countDownDate = new Date(countDownDateStr).getTime();
+
 var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;

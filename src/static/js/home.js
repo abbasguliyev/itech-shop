@@ -64,7 +64,7 @@ $(document).ready(function() {
         goToFirstSpeed : 1000,
         items : 1,
 
-        itemsDesktop : false,
+        itemsDesktop : [100,1],
         itemsDesktopSmall : false,
         itemsTablet: false,
         itemsMobile : false,
