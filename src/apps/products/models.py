@@ -90,13 +90,6 @@ class Product(models.Model):
             ("change_product", "Məhsulları yeniləyə bilər"),
             ("delete_product", "Məhsulları silə bilər")
         )
-
-    def save(self, *args, **kwargs):
-        if self.image != None:
-            new_image = compress(self.image)
-            self.image = new_image
-
-        super().save(*args, **kwargs)
     
     def __str__(self) -> str:
         return self.name
@@ -131,6 +124,13 @@ class ProductImage(models.Model):
             ("change_productimage", "Məhsul şəkillərini yeniləyə bilər"),
             ("delete_productimage", "Məhsul şəkillərini silə bilər")
         )
+
+    def save(self, *args, **kwargs):
+        if self.image != None:
+            new_image = compress(self.image)
+            self.image = new_image
+
+        super().save(*args, **kwargs)
 
     
 class ProductAttribute(models.Model):
@@ -215,6 +215,13 @@ class Banner(models.Model):
             ("change_banner", "Bannerləri yeniləyə bilər"),
             ("delete_banner", "Bannerləri silə bilər")
         )
+
+    def save(self, *args, **kwargs):
+        if self.image != None:
+            new_image = compress(self.image)
+            self.image = new_image
+
+        super().save(*args, **kwargs)
 
     def __str__(self) -> str:
         return self.title
