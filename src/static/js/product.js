@@ -3,7 +3,10 @@ $(document).ready(function () {
     $('.slider-prod-image').each(function () {
         $(this).click(function (e) { 
             e.preventDefault();
-            main_image.src = this.src
+            let newSrc = this.getAttribute('data-main-image');
+            main_image.src = newSrc
+            magnify("main-prod-image-id", 3);
+
         });
     });
 });

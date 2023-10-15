@@ -57,7 +57,7 @@
         </div>
     </section>
     <section class="carousel-wrapper">
-        <div class="owl-carousel owl-theme" id="home-banner">
+        <div class="owl-carousel owl-theme owl-loaded" id="home-banner">
             {% if banners.count != 0 %}
                 {% for banner in banners %}
                     <div class="item">
@@ -86,7 +86,7 @@
             </div>
         </div>
         <div class="offer-body">
-            <div class="owl-carousel owl-theme" id="home-offer">
+            <div class="owl-carousel owl-theme owl-loaded" id="home-offer">
                 {% if collection_prods|length != 0 %}
                     {% for product in collection_prods %}
                         <div class="offer_product_wrapper" id="{{product.pk}}">
@@ -112,10 +112,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="POST" action="{% url 'add_to_cart' %}" class="home-prod-cart-btn">
+                            <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn" hx-post="{% url "add_to_cart" %}" hx-trigger="submit" hx-target="#cart-icon-id">
                                 {% csrf_token %}
                                 <input type="hidden" value={{product.pk}} name="product">
-                                <button type="submit">Səbətə at</button>
+                                <button id="add_to_cart_btn_id" type="submit">Səbətə at</button>
                             </form>
                         </div>
                     {% endfor %}

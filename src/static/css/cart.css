@@ -22,6 +22,7 @@
 .cart_products_container {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap !important;
     border: 1px solid #ebebeb;
     padding: 2em;
     margin-right: 5em;
@@ -263,6 +264,10 @@ span {
 @media only screen and (max-width: 536px) {
     .cart_products_container li {
         font-size: 1.2em;
+    }
+
+    .cart-prod-name {
+        width: 10em;
     }
 
     .product-name-class {

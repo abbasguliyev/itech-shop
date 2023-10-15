@@ -36,7 +36,7 @@
                     <p style="font-size: 2em;">Məhsul tapılmadı</p>
                 </div>
             {% else %}
-                <div class="owl-carousel owl-theme" id="home-products" style="margin-left: 10px; margin-right: 10px;">
+                <div class="owl-carousel owl-theme owl-loaded" id="home-products" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
                     {% for product in products %}
                         {% include 'product_cart.html' %}
                     {% endfor %} 
@@ -54,7 +54,7 @@
                 <p style="font-size: 2em;">Servis tapılmadı</p>
             </div>
         {% else %}
-            <div class="owl-carousel owl-theme" id="home-services" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
+            <div class="owl-carousel owl-theme owl-loaded" id="home-services" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
                 {% for service in services %}
                     <div class="serv_container">
                         <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-img"/>
@@ -74,7 +74,7 @@
             <h3 class="section-title mb-4"><b>Partnyorlar</b></h3>
         </div>
         <div class="partners-body">
-            <div class="owl-carousel owl-theme" id="home-partners" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
+            <div class="owl-carousel owl-theme owl-loaded" id="home-partners" style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px">
                 {% for partner in partners %}
                 <div class="partners-slide">
                     <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">

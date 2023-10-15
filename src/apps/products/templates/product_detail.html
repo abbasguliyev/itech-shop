@@ -21,7 +21,7 @@
             </div>
             <div class="product_images_slider">
                 {% for image in product.images.all %}
-                    <img class="slider-prod-image" src="{{image.image.url}}" alt="{{forloop.counter}}">
+                    <img class="slider-prod-image" src="{{image.image.url}}" alt="{{forloop.counter}}" data-main-image="{{image.image.url}}">
                 {% endfor %}
             </div>
         </div>

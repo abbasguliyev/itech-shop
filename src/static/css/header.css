@@ -266,12 +266,12 @@ header div {
         background-color: #012849;
         transition: 0.5s;
         overflow: hidden;
-        z-index: 9999999999999 !important;
+        z-index: 10 !important;
     }
 
     .nav-bar.active {
         height: 450px;
-        z-index: 9999999999999 !important;
+        z-index: 10 !important;
     }
 
     .nav-bar ul {
