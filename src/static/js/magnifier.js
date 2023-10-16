@@ -58,5 +58,3 @@ function magnify(imgID, zoom) {
       return {x : x, y : y};
     }
 }
-
-magnify("main-prod-image-id", 1.5);

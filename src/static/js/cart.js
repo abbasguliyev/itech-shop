@@ -53,7 +53,7 @@ $(document).ready(function() {
         prod_url = ''
         for(var i=0; i<products_arr.length; i++) {
             href+=`\n${i+1}. ${products_arr[i].product} - ${products_arr[i].count} ədəd, \n`
-            prod_url += `\nhttps://itechshop.az/products/${products_arr[i].slug}/\n`
+            prod_url += `\n ${products_arr[i].product}-https://itechshop.az/products/${products_arr[i].slug}/, \n`
         }
         href+=`Ümumi məbləğ: ${totalPrice} AZN.`
         href+=prod_url
