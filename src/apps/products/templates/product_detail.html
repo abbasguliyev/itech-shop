@@ -64,7 +64,7 @@
                     {{product.description | safe}}
                 </div>
                 <div class="product_detail_info_btn_group">
-                    <form method="POST" action="{% url 'add_to_cart' %}">
+                    <form method="POST" action="{% url 'add_to_cart' %}" hx-post="{% url "add_to_cart" %}" hx-trigger="submit delay:500ms" hx-target="#cart-icon-id" id="add-to-cart-form-id">
                         {% csrf_token %}
                         <input type="hidden" value={{product.pk}} name="product">
                         <button type="submit" class="product_detail_info_btn_cart">Səbətə at</button>
