@@ -1,4 +1,4 @@
-$(document).ready(function() {    
+$(document).ready(function() {
     $('.minus').click(function () {
         let all_price = parseFloat($("#total-price-id").text())
 
@@ -49,7 +49,7 @@ $(document).ready(function() {
             products_arr.push(prod_obj)
             console.log(slugs[i].innerText)
         }
-        href+=`&text=Salam. Aşağıdakı məhsulları almaq istəyirəm. `
+        href+=`/?text=Salam. Aşağıdakı məhsulları almaq istəyirəm. `
         prod_url = ''
         for(var i=0; i<products_arr.length; i++) {
             href+=`\n${i+1}. ${products_arr[i].product} - ${products_arr[i].count} ədəd, \n`

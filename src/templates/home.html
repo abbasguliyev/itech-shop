@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Ana Səhifə{% endblock title %}
 {% block content %}
-<div class="message-alert">
+<div class="message-alert" id="message">
     {% if messages %} 
     {% for message in messages %}
     <div class="message-alert-body {% if message.tags == 'error' %} alert-danger {% else %} alert {% endif %} alert-dismissible fade show" role="alert">
@@ -128,5 +128,10 @@ var x = setInterval(function() {
         document.getElementById("demo").innerHTML = "EXPIRED";
     }
 }, 1000);
+
+message = document.getElementById("message")
+setTimeout(() => {
+    message.style.display="none";
+}, 4000)
 </script>
 {% endblock custom_js %}

@@ -82,7 +82,7 @@ class Product(models.Model):
 
     class Meta:
         verbose_name_plural = _("Məhsullar")
-        ordering = ('pk',)
+        ordering = ('-pk',)
         default_permissions = []
         permissions = (
             ("view_product", "Mövcud məhsullara baxa bilər"),

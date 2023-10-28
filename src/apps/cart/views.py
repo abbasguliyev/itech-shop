@@ -20,10 +20,11 @@ def add_to_cart(request):
             prod_list = request.session.get("cart")
             prod_list = set(prod_list)
             prod_list.add(product.pk)
+            messages.success(request, "Məhsul səbətə əlavə edildi")
         else:
             prod_list = set()
             prod_list.add(product.pk)
-
+            messages.success(request, "Məhsul səbətə əlavə edildi")
         request.session["cart"] = list(prod_list)
     return render(request, "htmx_cart.html")
 

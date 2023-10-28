@@ -1,4 +1,5 @@
 {% load static %}
+
 <div class="product_wrapper" id="{{product.pk}}">
     <div class="prod_container">
         <div onclick="location.href='{% url 'product_detail' product.slug %}';">
@@ -10,7 +11,7 @@
             <div class="prod_detail">
                 <div>
                     <h4>
-                        {{ product.name }}
+                        {{ product.name|truncatechars:30 }}
                     </h4>
                     {% if product.discount_amount is None %}
                     <p class="prod_price"><b>{{ product.price }} AZN</b></p>
@@ -21,10 +22,10 @@
                 </div>
             </div>
         </div>
-        <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn" hx-post="{% url "add_to_cart" %}" hx-trigger="submit" hx-target="#cart-icon-id">
+        <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn" hx-post="{% url "add_to_cart" %}" hx-trigger="submit delay:500ms" hx-target="#cart-icon-id" id="add-to-cart-form-id">
             {% csrf_token %}
             <input type="hidden" value={{product.pk}} name="product">
-            <button id="add_to_cart_btn_id" type="submit">Səbətə at</button>
+            <button id="add_to_cart_btn_id" type="submit"><i id="prod-add-to-cart-check-icon" class="fa-solid fa-check me-3" style="display: none;"></i>Səbətə at</button>
         </form>
     </div>
     <div class="prod-attr">

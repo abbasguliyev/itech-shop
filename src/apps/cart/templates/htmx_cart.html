@@ -1,7 +1,27 @@
 {% load static %}
 
+<div class="message-alert" id="message">
+  {% if messages %} 
+  {% for message in messages %}
+  <div class="message-alert-body {% if message.tags == 'error' %} alert-danger {% else %} alert {% endif %} alert-dismissible fade show" role="alert">
+      {{message}}
+      <button type="button" class="btn-close" style="color: #fff !important;" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %} 
+  {% endif %}
+</div>
+
 <li class="cart-icon" id="cart-icon-id">
     <a href="{% url 'cart' %}">
       <i class="fa-solid fa-cart-shopping"></i>{% if request.session.cart|length > 0 %}<span>{{request.session.cart | length}}</span>{% endif %}
     </a>
 </li>
+
+{% block custom_js %}
+<script>
+  message = document.getElementById("message")
+  setTimeout(() => {
+    message.style.display="none";
+  }, 4000)
+</script>
+{% endblock custom_js %}

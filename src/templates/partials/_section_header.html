@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn" hx-post="{% url "add_to_cart" %}" hx-trigger="submit" hx-target="#cart-icon-id">
+                            <form method="POST" action="{% url 'add_to_cart' %}" class="prod-cart-btn" hx-post="{% url "add_to_cart" %}" hx-trigger="submit delay:500ms" hx-target="#cart-icon-id">
                                 {% csrf_token %}
                                 <input type="hidden" value={{product.pk}} name="product">
                                 <button id="add_to_cart_btn_id" type="submit">Səbətə at</button>
