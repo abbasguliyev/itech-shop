@@ -11,6 +11,13 @@ class ProductColorInline(admin.TabularInline):
     model = ProductColor
     extra = 0
 
+    @admin.display
+    def color_code(self):
+        from django.utils.html import format_html
+        return format_html(
+            '<input type="text" id="demo" value="#336699" />'
+        )
+
 class ProductAttributeInline(admin.TabularInline):
     model = ProductAttribute
     filter_horizontal = ['attribute_values']
@@ -37,16 +44,6 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name', 'price')
     prepopulated_fields = {"slug": ['name']}
 
-# @admin.register(ProductImage)
-# class ProductImageAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'product')
-#     list_filter = ('product',)
-
-
-# @admin.register(ProductColor)
-# class ProductColorAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'product', 'color_code')
-#     list_filter = ('product', 'color_code')
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -57,12 +54,6 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('name', 'slug')
     prepopulated_fields = {"slug": ['name']}
 
-# @admin.register(AttributeValues)
-# class AttributeValuesAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'value')
-#     list_display_links = ('id', 'value')
-#     list_filter = ('value',)
-#     search_fields = ('value',)
 
 @admin.register(Attributes)
 class AttributesAdmin(admin.ModelAdmin):
@@ -111,16 +102,6 @@ class CollectionAdmin(admin.ModelAdmin):
                 is_stacked=False,
             )
         return super().formfield_for_manytomany(db_field, request, **kwargs)
-
-# @admin.register(ProductAttribute)
-# class ProductAttributeAdmin(admin.ModelAdmin):
-#     def formfield_for_manytomany(self, db_field, request, **kwargs):
-#         if db_field.name == "attribute_values":
-#             kwargs["widget"] = admin.widgets.FilteredSelectMultiple(
-#                 db_field.verbose_name,
-#                 is_stacked=False,
-#             )
-#         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
 @admin.register(HomePageProducts)
 class HomePageProductsAdmin(admin.ModelAdmin):
